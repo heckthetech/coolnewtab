@@ -1,0 +1,17 @@
+//pluginname{DateDisplay}version{1.0}Author{Heck}
+
+default localstorage.drag_dateWidget = 115,15;
+
+create div with id(#dateWidget) ^^
+  <style>
+    #dateWidget {
+ z-index: 110;
+         font-family: 'CLFont';
+    border-radius: 12px;
+    text-align: center;
+    user-select: none;
+    cursor: default;
+    background: transparent;}    
+  </style>
+  <h1 id="dateDisplay" dragmovable="0,0,stored">loadtextfrom(date.format="dd/mm day")</h1>
+^^;
