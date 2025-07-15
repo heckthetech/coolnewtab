@@ -129,7 +129,7 @@ const plugins = [
   Perfect for focus, relaxation, or background mood enhancement—just load it and let the calm flow.
 </p>
 `,
-    "DeeperBGM.intheck"
+    "DeeperBGM.intheck?v=3"
   ],
 
 
