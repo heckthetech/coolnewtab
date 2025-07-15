@@ -104,7 +104,7 @@ const plugins = [
   This plugin ensures all search queries use Yahoo, giving you consistent results and a familiar search interface.
 </p>
 `,
-    "Force Yahoo Search Engine.intheck"
+    "forceyahoosearchengine.intheck"
   ],
 
 
