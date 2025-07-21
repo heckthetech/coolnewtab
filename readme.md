@@ -14,9 +14,7 @@ A sleek, fast, and customizable new tab experience for your browser — optimize
 
 ## Installation
 
-[![Get it on Edge](https://heckthetech.github.io/coolnewtab/useless/getonedge.png)](https://microsoftedge.microsoft.com/addons/detail/cool-new-tab/felhaffgopblgagelfogooobffpmcbjj)
-
-[![v2.1.9 stable - Download](https://img.shields.io/badge/v2.1.9%20stable-Download-blue?style=for-the-badge&logo=github)](https://github.com/heckthetech/coolnewtab/releases/latest)
+[![Get it on Edge](https://heckthetech.github.io/coolnewtab/useless/getonedge.png)](https://microsoftedge.microsoft.com/addons/detail/cool-new-tab/felhaffgopblgagelfogooobffpmcbjj) [![v2.1.9 stable - Download](https://img.shields.io/badge/v2.1.9%20stable-Download-blue?style=for-the-badge&logo=github)](https://github.com/heckthetech/coolnewtab/releases/latest)
 
 ## Release Notes
 
