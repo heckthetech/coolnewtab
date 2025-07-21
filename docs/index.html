@@ -1,2 +1,146 @@
-this site is under Development
-<a href="https://heckthetech.github.io/coolnewtab/pluginstore/"> Visit Plugin Store</a>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cool New Tab – Features</title>
+  <style>
+    :root {
+      --bg: #1a1a1d;
+      --card: #2a2a2d;
+      --text: #f5f5f5;
+      --accent: #ffb3ec;
+      --primary: #b388ff;
+      --soft: #3a3a40;
+      --muted: #aaa;
+      --radius: 20px;
+      --font: 'Segoe UI', 'Nunito', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    .hero {
+        height: 55vh;
+    background: url('https://heckthetech.github.io/coolnewtab/useless/thumbnail.png') no-repeat;
+    background-size: cover;
+    background-position-y: 20%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 2rem;
+    box-shadow: inset 0 -100px 60px -50px rgba(26,26,29,1);
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      text-shadow: 0 0 8px #000;
+      color: #fff;
+    }
+
+    main {
+      max-width: 960px;
+      margin: -3rem auto 2rem;
+      padding: 2rem;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .card {
+      background: var(--soft);
+      padding: 1.2rem;
+      border-radius: var(--radius);
+      margin-bottom: 1.5rem;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    h2 {
+      color: var(--accent);
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: var(--text);
+      line-height: 1.6;
+      margin: 0.5rem 0 1.2rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .actions a {
+      display: inline-flex;
+      text-decoration: none;
+    }
+
+    .actions img.edge {
+      width: 220px;
+    }
+
+    .actions img.download {
+      height: 32px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 3rem 0 1rem;
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <h1>Cool New Tab</h1>
+  </section>
+  <main>
+    <div class="card">
+      <h2>🚀 Blazing Fast</h2>
+      <p>Cool New Tab loads instantly and runs smooth even on low-end devices with limited RAM.</p>
+    </div>
+    <div class="card">
+      <h2>🎨 Customizable</h2>
+      <p>Supports your own themes, search engines, and plugins via our Interpreter Language.</p>
+    </div>
+    <div class="card">
+      <h2>🧠 Smart Plugin System</h2>
+      <p>Create your own new-tab experience with DIY plugins or use ones from the plugin store.</p>
+    </div>
+    <div class="card">
+      <h2>💾 Offline &amp; Private</h2>
+      <p>Fully offline. No trackers, ads, or data collection — your browser, your rules.</p>
+    </div>
+
+    <div class="actions">
+      <a href="https://microsoftedge.microsoft.com/addons/detail/cool-new-tab/felhaffgopblgagelfogooobffpmcbjj">
+        <img class="edge" src="https://heckthetech.github.io/coolnewtab/useless/getitonedge.png" alt="Get it on Edge">
+      </a>
+      <a href="https://github.com/heckthetech/coolnewtab/releases/download/v2.1.9/cool-newtab_v2.1.9_stable_release.zip">
+        <img class="download" src="https://img.shields.io/badge/v2.1.9%20stable-Download-blue?style=for-the-badge&amp;logo=github" alt="Download v2.1.9 stable">
+      </a>
+    </div>
+  </main>
+  <div class="footer">
+    Made with 💖 by {heck} | No ads. No data. Just pixels.
+  </div>
+</body></html>
