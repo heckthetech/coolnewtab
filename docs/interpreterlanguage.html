@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Interpreter Language Manual</title>
+  <style>
+
+@font-face {
+      font-family: 'Pfont';
+      src: url('./pluginstore/pfont.ttf') format('truetype');
+    }
+    :root {
+      --bg: #121212;
+      --fg: #e0e0e0;
+      --accent: #90caf9;
+      --card: #1e1e1e;
+      --code-bg: #2a2a2a;
+      --border: #333;
+      --highlight: #64ffda;
+    }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Pfont', sans-serif;
+      margin: 0;
+      display: flex;
+    }
+    nav {
+      width: 270px;
+      background: #181818;
+      padding: 2rem 1rem;
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    nav h2 {
+      color: var(--accent);
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+    nav li {
+      margin: 0.6rem 0;
+    }
+    nav a {
+      color: var(--fg);
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 0.3rem 0.5rem;
+      display: block;
+      border-radius: 4px;
+    }
+    nav a:hover {
+      background: #252525;
+      color: var(--highlight);
+    }
+    main {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+      max-height: 100vh;
+    }
+    h1, h2, h3 {
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+    }
+    .section {
+      background: var(--card);
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+    }
+    pre {
+      background: var(--code-bg);
+      color: #80cbc4;
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.95rem;
+    }
+    .step {
+      margin-bottom: 1.2rem;
+    }
+    .step strong {
+      color: var(--highlight);
+    }
+    .note {
+      background: #263238;
+      border-left: 4px solid #00acc1;
+      padding: 1rem;
+      border-radius: 6px;
+      color: #b2ebf2;
+      margin-top: 1rem;
+    }
+    ul {
+      padding-left: 1.5rem;
+    }
+    a {
+      color: #4fc3f7;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <h2>📚 Learn Interpreter Language</h2>
+    <ul>
+      <li><a href="#intro">🧠 Intro</a></li>
+      <li><a href="#structure">🧱 Structure</a></li>
+      <li><a href="#create">📦 Create Elements</a></li>
+      <li><a href="#storage">💾 Storage</a></li>
+      <li><a href="#event">🎯 Event Listeners</a></li>
+      <li><a href="#input">🧍 Get Input</a></li>
+      <li><a href="#date">📅 Date Format</a></li>
+      <li><a href="#search">🔍 Search Widget</a></li>
+      <li><a href="#css">🎨 CSS</a></li>
+      <li><a href="#drag">📦 Draggable</a></li>
+      <li><a href="#example">🧪 Example</a></li>
+      <li><a href="#rules">📏 Rules</a></li>
+      <li><a href="#tips">💡 Tips</a></li>
+    </ul>
+  </nav>
+  <main>
+    <h1>📘 Interpreter Language Manual</h1>
+
+    <div class="section" id="intro">
+      <h2>🧠 What is Interpreter Language?</h2>
+      <p><strong>Interpreter Language</strong> (Developed by heck) is a simple language for creating widgets like counters, buttons, inputs, and draggable windows — all without needing to write JavaScript directly.</p>
+      <p>Everything is written using easy-to-read commands inside special blocks starting with <code>^^</code> and ending with <code>^^;</code>.</p>
+      <p>This manual will guide you step-by-step, perfect if you're new to this!</p>
+    </div>
+
+    <div class="section" id="structure">
+      <h2>🧱 Step-by-Step: Basic Structure</h2>
+      <div class="step">
+        <strong>Step 1:</strong> Write your command line. For example:<br>
+        <code>create div with id(#hello)^^</code>
+      </div>
+      <div class="step">
+        <strong>Step 2:</strong> On a new line, add the HTML content you want inside that element.<br>
+        <em>Don't put content inline with the command.</em>
+      </div>
+      <div class="step">
+        <strong>Step 3:</strong> Close the command block with <code>^^;</code> on its own line.
+      </div>
+      <pre>create div with id(#hello)^^
+  &lt;p&gt;Welcome!&lt;/p&gt;
+^^;</pre>
+    </div>
+
+    <div class="section" id="create">
+      <h2>📦 Creating Elements</h2>
+      <p>To add elements, use <code>create</code> with the element type and ID.</p>
+      <div class="step">
+        <strong>Example:</strong> Create a box that says "Hello World":<br>
+        <pre>create div with id(#mybox)^^
+  &lt;h1&gt;Hello World&lt;/h1&gt;
+  &lt;p&gt;This is a custom widget.&lt;/p&gt;
+^^;</pre>
+      </div>
+      <p>You can put any valid HTML inside the block.</p>
+    </div>
+
+    <div class="section" id="storage">
+      <h2>💾 Using Storage</h2>
+      <p>Interpreter Language lets you save values that stick around even if the page reloads, using <code>localstorage</code>.</p>
+      <div class="step">
+        <strong>Set a value:</strong><br>
+        <pre>set localstorage.score = "100";</pre>
+      </div>
+      <div class="step">
+        <strong>Set default value if none exists yet:</strong><br>
+        <pre>default localstorage.count = 0;</pre>
+      </div>
+      <div class="step">
+        <strong>Change values easily:</strong><br>
+        <pre>inc localstorage.count;  // increase by 1
+dec localstorage.count;  // decrease by 1
+reset localstorage.count;  // reset to empty</pre>
+      </div>
+    </div>
+
+    <div class="section" id="event">
+      <h2>🎯 Event Listeners (Click Actions)</h2>
+      <p>To react to clicks or other events, use <code>create eventlistener-on(#id)-doing^^ ... ^^;</code>.</p>
+      <div class="step">
+        <strong>Example:</strong> Increase a counter when a button is clicked:<br>
+        <pre>create eventlistener-on(#plus)-doing^^
+  inc localstorage.count;
+^^;</pre>
+      </div>
+      <p>This adds a click listener to <code>#plus</code> that increases the <code>count</code> stored value.</p>
+    </div>
+
+    <div class="section" id="input">
+      <h2>🧍 Getting Input Values</h2>
+      <p>If you create an input element, you can get its current value using <code>getvalue(#inputid)</code>.</p>
+      <div class="step">
+        <strong>Example:</strong> Save the text typed inside input <code>#myinput</code> when a button is clicked:<br>
+        <pre>create eventlistener-on(#savebtn)-doing^^
+  set localstorage.text = getvalue(#myinput)
+^^;</pre>
+      </div>
+    </div>
+
+    <div class="section" id="date">
+      <h2>📅 Date Format</h2>
+      <p>To show dates, use:</p>
+      <pre>loadtextfrom(date.format="dd/mm/yyyy dayname")</pre>
+      <p>Where:</p>
+      <ul>
+        <li><code>dd</code> = day number (01–31)</li>
+        <li><code>mm</code> = month number (01–12)</li>
+        <li><code>mtext</code> = full month name (June)</li>
+        <li><code>mtxt</code> = short month name (Jun)</li>
+        <li><code>yyyy</code> = full year (2025)</li>
+        <li><code>yy</code> = short year (25)</li>
+        <li><code>dayname</code> = full weekday name (Friday)</li>
+        <li><code>day</code> = short weekday name (Fri)</li>
+      </ul>
+    </div>
+
+    <div class="section" id="search">
+      <h2>🔍 Search Widget</h2>
+      <p>Create a search box that links to a website search like Google with:</p>
+      <pre>create searcher for-(https://google.com/search?q=!!gettextfrominputid!!)-inputid(#input)-buttonid(#btn)</pre>
+      <p>This creates a search that sends input text to Google when the button is clicked.</p>
+    </div>
+
+    <div class="section" id="css">
+      <h2>🎨 Applying CSS</h2>
+      <p>To add CSS styles, use <code>set override css = ^^ ... ^^;</code>.</p>
+      <div class="step">
+        <strong>Example:</strong> Change body background and text color:<br>
+        <pre>set override css = ^^
+  body {
+    background: black;
+    color: white;
+  }
+^^;</pre>
+      </div>
+      <p>Note: Avoid overriding body styles if the parent page already has them.</p>
+    </div>
+
+    <div class="section" id="drag">
+      <h2>📦 Making Elements Draggable</h2>
+      <p>To make an element draggable, add <code>dragmovable</code> attribute to the element's div:</p>
+      <pre>&lt;div dragmovable&gt;Drag me!&lt;/div&gt;</pre>
+      <p>You can also add offsets or save position:</p>
+      <pre>&lt;div dragmovable="-5,-5"&gt;Offset drag&lt;/div&gt;
+&lt;div dragmovable="0,0,stored"&gt;Saved position&lt;/div&gt;</pre>
+    </div>
+
+    <div class="section" id="example">
+      <h2>🧪 Full Example</h2>
+      <pre>set override css = ^^
+  body { #app: black; color: white; }
+^^;
+
+default localstorage.count = 0;
+
+create div with id(#app)^^
+  &lt;h1&gt;Counter&lt;/h1&gt;
+  &lt;p&gt;loadtextfrom(localstorage.count)&lt;/p&gt;
+  &lt;button id="plus"&gt;+&lt;button&gt;
+  &lt;button id="minus"&gt;-&lt;button&gt;
+^^;
+
+create eventlistener-on(#plus)-doing^^
+  inc localstorage.count;
+^^;
+
+create eventlistener-on(#minus)-doing^^
+  dec localstorage.count;
+^^;</pre>
+      <p>This creates a simple counter widget with increment and decrement buttons.</p>
+    </div>
+
+    <div class="section" id="rules">
+      <h2>📏 Rules You Must Follow</h2>
+      <ul>
+        <li>Start code blocks with <code>//pluginname{Plugin Name}version{1.0}Author{Author}</code> (recommended).</li>
+        <li>Commands must start with the command and <code>^^</code> on the same line, no line break.</li>
+        <li>Content must be written between the two <code>^^</code> lines and closed with <code>^^;</code>.</li>
+        <li>Never write content inline like <code>create div ^^ &lt;p&gt;Hi&lt;/p&gt; ^^;</code>. Use new lines.</li>
+        <li>Each command block (<code>create</code>, <code>set</code>, <code>eventlistener</code>, <code>css</code>) must follow this format.</li>
+        <li>Widgets should have a style property <code>z-index: 1;</code> on div IDs for visibility.</li>
+        <li>Widgets are best made draggable using <code>dragmovable</code> attribute.</li>
+      </ul>
+    </div>
+
+    <div class="section" id="tips">
+      <h2>💡 Tips</h2>
+      <ul>
+        <li>Don't override <code>body</code> styles unless necessary.</li>
+        <li>Use professional and cool dark-themed CSS for better user experience.</li>
+        <li>Make widgets draggable with a header bar for easier movement and saving position.</li>
+      </ul>
+    </div>
+  </main>
+</body>
+</html>
