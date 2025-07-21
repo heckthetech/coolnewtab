@@ -8,7 +8,8 @@ A sleek, fast, and customizable new tab experience for your browser — optimize
 
 - Clean and minimal design  
 - Quick access to your favorite sites  
-- Customizable backgrounds and widgets  
+- Vast search engine support with custom [search engines](https://heckthetech.github.io/coolnewtab/wiki/searchengine)
+- Extremely customizable through [Interpreter Language](https://heckthetech.github.io/coolnewtab/interpreterlanguage.html) [Plugins](https://heckthetech.github.io/coolnewtab/pluginstore/) 
 - Lightweight and fast loading, designed to work smoothly even on low-end devices  
 - Minimal RAM usage for better performance on systems with limited resources  
 
@@ -24,4 +25,4 @@ See the [Releases](https://github.com/heckthetech/coolnewtab/releases) page for 
 
 ## Contact
 
-[![report_issue-{heck}](https://img.shields.io/badge/report_issue-%7Bheck%7D-blue?logo=github&style=for-the-badge)](https://github.com/heckthetech/coolnewtab/report)
+[![report_issue-{heck}](https://img.shields.io/badge/report_issue-%7Bheck%7D-blue?logo=github&style=for-the-badge)](https://github.com/heckthetech/report)
