@@ -1,0 +1,60 @@
+//pluginname{BetterTiles}version{1.3}Author{Heck}
+
+
+set override css = ^^
+  body {
+    background: #666666 !important;
+  }
+
+.tile {
+  position: relative !important;
+    width: 100px !important;
+    height: 90px !important;
+    display: flex !important;
+    align-items: center !important;
+    padding-left: 15px !important;
+    margin-left: 20px !important;
+    gap: 10px !important;
+    text-align: left !important;
+}
+
+.tile {
+    background-color: #ffffff00 !important;
+    padding: 15px 30px !important;
+    border-radius: 20px !important;
+    text-decoration: none !important;
+    color: #fff !important;
+    font-size: 1.1rem !important;
+    font-weight: 500 !important;
+    box-shadow: none !important;
+    transition: background 0.3s ease, transform 0.2s ease !important;
+    user-select: none; !important}
+
+.tile img {
+    width: auto !important;
+    height: 60% !important;
+    margin-left: 0 !important;
+    flex-shrink: 0 !important;
+    position: absolute !important;
+    top: 5% !important;
+    left: 30% !important;
+}
+.tile-title {
+       white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: block !important;
+    margin-bottom: -65px !important;
+    min-width: 90px !important;
+    max-width: 100px !important;    
+    text-align: center !important;
+    position: absolute !important;
+    left: 12% !important;
+}
+
+.tile img {transition: scale linear 100ms ;}
+.tile:hover img {scale:1.1;}
+^^;
+
+
+ 
