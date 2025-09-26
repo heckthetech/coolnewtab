@@ -3,6 +3,7 @@
   "updatedateid": "26sep2025",
   "count": "1",
   "importance": "1",
-  "txt": "Replaces the new tab page with a cool bloat-free new tab By HeckTheTech.",
-  "media": {"img": "/6460458.png"}
+  "header": "Hello",
+  "txt": "Hello dude", 
+  "media": {"img": "abc.com/hello.png"} 
 }
