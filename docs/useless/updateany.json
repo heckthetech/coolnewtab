@@ -5,5 +5,5 @@
   "importance": "1",
   "header": "Hello",
   "txt": "Hello dude", 
-  "media": {"img": "abc.com/hello.png"} 
+  "media": {none} 
 }
