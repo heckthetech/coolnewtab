@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
   "updatedateid": "26sep2025",
-  "count": "1",
+  "count": "2",
   "importance": "1",
   "header": "Hello",
   "txt": "Hello dude", 
-  "media": {none} 
+  "media": {"none":"none"} 
 }
