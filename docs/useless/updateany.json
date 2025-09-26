@@ -3,7 +3,7 @@
   "updatedateid": "26sep2025",
   "count": "3",
   "importance": "1",
-  "importancelist":{"1:💁‍♂️", "2:🔔", "3:ℹ️", "4:✅", "5:⭐", "6:🔥", "7:⚡", "8:❗", "9:🚨", "10:⚠️"},
+  "importancelist":{"list":"1:💁‍♂️  2:🔔 3:ℹ️ 4:✅ 5:⭐ 6:🔥 7:⚡ 8:❗ 9:🚨 10:⚠️"},
   "header": "Regards",
   "txt": "Say hello, to the new update ! Check out all new features at <a href='https://github.com/heckthetech/coolnewtab/releases/tag/v2.2.1'>Changelogs</a>😉", 
   "media": {"none":"none"} 
