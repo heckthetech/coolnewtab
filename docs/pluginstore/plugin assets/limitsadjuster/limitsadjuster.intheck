@@ -1,4 +1,4 @@
-//pluginname{limits Adjuster}version{1.3}Author{Heck}
+//pluginname{limits Adjuster}version{1.4}Author{Heck}autoupdate{"https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/limitsadjuster/plugininfo.json"}
 
 set override css = ^^
 #bookmarkcustom{display:none;}
@@ -6,7 +6,7 @@ set override css = ^^
 ^^;
 
 set localstorage.MAX_BOOKMARKS = 15;
-set localstorage.layoutPattern = 5,5,5;
+set localstorage.layoutPattern = 6,5,4;
 
 create div with id(#layoutcustom) ^^
 on
@@ -14,3 +14,4 @@ on
 create div with id(#bookmarkcustom) ^^
 on
 ^^;
+
