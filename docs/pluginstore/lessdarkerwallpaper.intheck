@@ -1,4 +1,0 @@
-//pluginname{Less Darker Wallpaper}version{1.0}Author{Heck}
-set override css = ^^
-  #bodya {background:rgb(0 0 0 / 18%) !important;}
-^^;
