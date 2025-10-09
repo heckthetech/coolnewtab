@@ -23,7 +23,7 @@ A sleek, fast, and customizable new tab experience for your browser — optimize
 
 After downloading:
 - Unzip the file  
-- Go to any Chromium browser (Chrome, Edge, Brave, etc.)  
+- On any Chromium browser (Chrome, Edge, Brave, etc.)  
 - Open **Extensions** → Enable **Developer Mode**  
 - Click **Load unpacked** → Select the unzipped folder  
 
