@@ -1,9 +1,9 @@
-//pluginname{BetterTiles}version{1.4}Author{Heck}autoupdate{"https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/bettertiles/plugininfo.json"}
+//pluginname{BetterTiles}version{1.5}Author{Heck}autoupdate{"https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/bettertiles/plugininfo.json"}
 
 
 set override css = ^^
   body {
-    background: #666666 !important;
+    background: #414141 !important;
   }
 
 .tile {
@@ -58,4 +58,5 @@ set override css = ^^
 
 
  
+
 
