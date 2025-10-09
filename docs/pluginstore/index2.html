@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Plugin Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  @font-face { font-family: 'Pfont'; src: url('pfont.ttf') format('truetype'); }
+  :root {
+    --bg: #121212; --sidebar: #1a1a1a; --card: #1e1e1e; --text: #ffffff;
+    --subtext: #aaaaaa; --gradient: linear-gradient(135deg, #043efa87, #00c0e4);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Pfont', sans-serif; background: var(--bg); color: var(--text); display: flex; height: 100vh; }
+  
+  .loading-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(18, 18, 18, 0.85); backdrop-filter: blur(4px);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 10000; visibility: hidden; opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  .loading-overlay.visible { visibility: visible; opacity: 1; }
+  .spinner {
+    width: 60px; height: 60px; border: 6px solid #444;
+    border-top-color: #00c0e4; border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .extension-warning-overlay {
+    display: none; /* Hidden by default */
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--bg); color: var(--text);
+    justify-content: center; align-items: center; text-align: center;
+    z-index: 9998; flex-direction: column; padding: 20px;
+  }
+  .extension-warning-overlay h1 { font-size: 2rem; color: #a0d8cc; }
+  .extension-warning-overlay p { font-size: 1rem; color: var(--subtext); margin-top: 10px; max-width: 500px; }
+  
+  aside, .main-area {
+      display: none;
+  }
+
+  aside { width: 220px; background: var(--sidebar); padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+  aside h2 { font-size: 1.2rem; margin-bottom: 10px; }
+  aside button { background: none; border: none; color: var(--subtext); text-align: left; padding: 10px 0; font-size: 1rem; cursor: pointer; transition: color 0.2s; }
+  aside button:hover { color: #fff; }
+  .main-area { flex: 1; overflow-x: hidden; overflow-y: auto; padding: 20px 80px;}
+  header { background: #161616; padding: 14px 20px; border-radius: 12px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+  header h1 { font-size: 1.5rem; }
+  .search-bar input { padding: 6px 12px; background: #1f1f1f; color: white; border: none; border-radius: 10px; width: 600px; height: 40px; font-family: calibri; }
+  .plugin-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); position: relative; gap: 25px; }
+  .plugin-card { width: 370px; height: 280px; background: var(--card); border-radius: 16px; overflow: hidden; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease , width 0.2s ease-out, height 0.2s ease-out; display: flex; flex-direction: column; position: relative; z-index: 1; transform-origin: center center; will-change: transform; }
+  .plugin-card:hover { transform: scale(1.15); z-index: 10; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6); width: 480px; height: 340px; }
+  .poster { width: 100%; height: 200px; object-fit: cover; border-bottom: 1px solid #222; transition: filter 0.3s ease; pointer-events: none; }
+  .larposter { width: 100%; height: 200px; object-fit: cover; border-bottom: 1px solid #222; transition: filter 0.3s ease; pointer-events: none; position: absolute; top: 0;left: 0;opacity: 0; transition: opacity 0.4s ease-out; }
+  .plugin-card:hover .poster { filter: brightness(0); } 
+  .plugin-card:hover .larposter { opacity: 1; }
+  .plugin-content { padding: 10px 14px; flex-grow: 1; display: flex; flex-direction: column; gap: 6px; position: relative; z-index: 3; }
+  .plugin-card h3 { font-size: 1.1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); }
+  .plugin-card .view-btn{opacity: 0;transition: 0.3s ease;}
+  .plugin-card:hover .view-btn{opacity: 1;}
+  .plugin-card p.slogan { font-size: 0.9rem; color: var(--subtext); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .plugin-card p.desc { color: var(--subtext); font-size: 0.85rem; white-space: normal; overflow: hidden; text-overflow: ellipsis; margin-top: 20px;opacity: 0; transition: 0.3s ease; }
+  .plugin-card:hover p.desc { opacity: 1; }
+  .plugin-actions { display: flex; gap: 10px; margin-top: 8px; justify-content: right; }
+  .plugin-actions button { padding: 8px 7px; width: 75px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; background: var(--gradient); color: #fff; transition: 0.1s ease; }
+  .plugin-actions button:hover { filter: brightness(0.9); }
+  .plugin-expanded-overlay { position: fixed; top: 0; left: 50%; bottom: 0; background: rgb(24 24 24); flex-direction: column; padding: 40px; overflow-y: auto; display: flex; z-index: 9999; width: 80%; outline: none; transition: 500ms cubic-bezier(0.4, 0, 0.2, 1); transform: scale(1)translateX(-50%)translateY(250%); }
+  .plugin-expanded-overlay.active { transform: scale(1)translateX(-50%)translateY(0); }
+  .plugin-expanded-overlaybg { position: fixed; top: 0; left: 0; background:black; z-index: 8999; width: 100%; height: 100%; transform: scale(0)translate3d(150%,150%,0); transition:500ms cubic-bezier(0.4, 0, 0.2, 1); }
+  .plugin-expanded-overlaybg.active { transform: scale(1); }
+  #expandedOverlay::-webkit-scrollbar {width: 12px;}
+  #expandedOverlay::-webkit-scrollbar-track {background: #1e1e1e;border-radius: 10px;}
+  #expandedOverlay::-webkit-scrollbar-thumb {background-color: #555;border-radius: 10px;border: 3px solid #1e1e1e;}
+  #expandedOverlay::-webkit-scrollbar-thumb:hover {background-color: #777;}
+  .overlay-close { align-self: flex-end; font-size: 4rem; font-weight: bold; color: var(--subtext); cursor: pointer; user-select: none; position: sticky; top: 0; right: 0; background: #000000; transform: translate3d(80%, -70%,0); }
+  .overlay-close:hover { color: #fff; }
+  .overlay-title { font-size: 2rem; margin-bottom: 12px; }
+  .overlay-slogan { font-size: 1.2rem; margin-bottom: 20px; color: var(--subtext); }
+  .overlay-poster { object-fit: cover; max-height: 300px; margin-bottom: 20px; border-radius: 12px; }
+  .overlay-desc { white-space: pre-line; font-size: 1rem; line-height: 1.4; color: #ddd; flex-grow: 1; }
+  .overlay-actions { display: flex; background-color: #272727; position: sticky; width: fit-content; gap: 5%; bottom: 0; right: 0; transform: translate3d(70%, 60%, 0); }
+  .overlay-actions button { padding: 10px 18px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; background: var(--gradient); color: #fff; width: 250px; height: 40px; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s; }
+  .overlay-actions button:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 6px 24px rgba(114, 207, 255, 0.35); border-color: rgba(255, 255, 255, 0.25); }
+  #exploreWrapper { margin-top: auto; padding: 2rem 0 1rem; display: flex; justify-content: flex-end; position: fixed; bottom: 10px; right: 40px; z-index: 1000; }
+  #exploreCommunity { background: linear-gradient(135deg, #fa045287, #e46700); color: #b8eaff; border: 2px solid rgb(255 255 255 / 64%); padding: 0.9em 1.6em; border-radius: 12px; font-size: 1rem; cursor: pointer; font-weight: 600; box-shadow: 0 4px 20px rgba(114, 207, 255, 0.2); display: flex; align-items: center; gap: 0.6em; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s; backdrop-filter: blur(4px); font-family: 'Pfont', sans-serif; text-shadow: 1px 2px 7px rgb(41 20 84 / 41%); user-select: none; }
+  #exploreCommunity:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 6px 24px rgba(114, 207, 255, 0.35); border-color: rgba(255, 255, 255, 0.25); }
+</style>
+</head>
+<body>
+  <div id="loadingOverlay" class="loading-overlay">
+    <div class="spinner"></div>
+  </div>
+  <script>
+    document.getElementById('loadingOverlay').classList.add('visible');
+  </script>
+
+  <div id="extensionWarning" class="extension-warning-overlay">
+    <div>
+        <h1>InterPreter Extension Not Detected</h1>
+        <p>Please ensure the extension is installed, enabled, and has a version greater than 2.0 to use the Plugin Store.</p>
+    </div>
+  </div>
+
+  <aside>
+    <h2>Explore</h2>
+    <button onclick="window.open('https://heckthetech.github.io/coolnewtab/interpreterlanguage.html')">Learn <br>InterPreter Language</button>
+  </aside>
+
+  <div class="main-area">
+    <header>
+      <h1>InterPreter Plugin Library</h1>
+      <div class="search-bar">
+        <input id="searchInput" type="text" placeholder="Search..." />
+      </div>
+    </header>
+    <h3>Explore plugins created by others</h3>
+    <br><br>
+    <div id="exploreWrapper">
+      <button id="exploreCommunity" onclick="createlisten();">
+        <span>😊</span> Create and Share Plugins you like<br> to help our Community grow
+      </button>
+    </div>
+
+    <div class="plugin-grid" id="pluginGrid"></div>
+  </div>
+
+  <div id="expandedOverlaybg" class="plugin-expanded-overlaybg" tabindex="-1" role="dialog" aria-modal="true"></div>
+  <div id="expandedOverlay" class="plugin-expanded-overlay" tabindex="-1" role="dialog" aria-modal="true">
+    <div class="overlay-close" id="overlayClose" aria-label="Close expanded view" role="button" tabindex="0">&times;</div>
+    <img id="overlayPoster" class="overlay-poster" alt="Large plugin poster" />
+    <h2 class="overlay-title" id="overlayTitle"></h2>
+    <div class="overlay-slogan" id="overlaySlogan"></div>
+    <div class="overlay-desc" id="overlayDesc"></div>
+    <div class="overlay-actions" id="overlayActions"></div>
+  </div>
+  
+  <div data="" style="position: fixed; bottom: 10px; left: 10px;" id="checkextensioninstalled">
+    <h1 style="position: fixed;top: 300px; left: 450px; background-color: black;">Extension not working or Not Installed</h1>
+  </div>
+
+<script>
+  (function robustDbLoader() {
+    const url = 'db.js?ts=' + Date.now();
+    if (Array.isArray(window.plugins) && window.plugins.length > 0) {
+      if (typeof onPluginsReady === 'function') setTimeout(() => onPluginsReady(), 50);
+      return;
+    }
+    fetch(url).then(async r => {
+      if (!r.ok) {
+        const s = document.createElement('script'); s.src = url;
+        s.onload = () => { if (typeof onPluginsReady === 'function') onPluginsReady(); };
+        s.onerror = (e) => console.error('fallback script load error', e);
+        document.head.appendChild(s); return;
+      }
+      const txt = await r.text();
+      try {
+        if (/window\.plugins\s*=/.test(txt)) {
+          const blob = new Blob([txt], { type: 'application/javascript' }); const s = document.createElement('script'); s.src = URL.createObjectURL(blob);
+          s.onload = () => { URL.revokeObjectURL(s.src); if (typeof onPluginsReady === 'function') onPluginsReady(); };
+          s.onerror = (e) => console.error('robustDbLoader: execution error', e);
+          document.head.appendChild(s); return;
+        }
+        const firstBracket = txt.indexOf('['); const lastBracket = txt.lastIndexOf(']');
+        if (firstBracket !== -1 && lastBracket > firstBracket) {
+          const arrText = txt.slice(firstBracket, lastBracket + 1);
+          try {
+            const arr = (new Function('return ' + arrText))();
+            if (Array.isArray(arr)) {
+              if (!Array.isArray(window.plugins) || window.plugins.length === 0) window.plugins = arr;
+              if (typeof onPluginsReady === 'function') onPluginsReady();
+              return;
+            }
+          } catch (e) { console.warn('robustDbLoader: array-eval failed', e); }
+        }
+        const blob2 = new Blob([txt], { type: 'application/javascript' }); const s2 = document.createElement('script'); s2.src = URL.createObjectURL(blob2);
+        s2.onload = () => {
+          URL.revokeObjectURL(s2.src);
+          if ((!Array.isArray(window.plugins) || window.plugins.length === 0) && typeof plugins !== 'undefined' && Array.isArray(plugins)) window.plugins = plugins;
+          if (typeof onPluginsReady === 'function') onPluginsReady();
+        };
+        s2.onerror = (e) => { console.error('robustDbLoader: final execution fallback failed', e); if (typeof onPluginsReady === 'function') onPluginsReady(); };
+        document.head.appendChild(s2);
+      } catch (ex) { console.error('robustDbLoader: unexpected error', ex); if (typeof onPluginsReady === 'function') onPluginsReady(); }
+    }).catch(e => {
+      console.error('robustDbLoader: fetch failed', e);
+      const s = document.createElement('script'); s.src = url;
+      s.onload = () => { if (typeof onPluginsReady === 'function') onPluginsReady(); };
+      s.onerror = (err) => console.error('fallback script load error', err);
+      document.head.appendChild(s);
+    });
+  })();
+</script>
+
+<script>
+/* --- Globals & DOM refs --- */
+if (!Array.isArray(window.plugins)) window.plugins = window.plugins || [];
+
+const grid = document.getElementById("pluginGrid");
+const overlay = document.getElementById("expandedOverlay");
+const overlaybg = document.getElementById("expandedOverlaybg");
+const overlayClose = document.getElementById("overlayClose");
+const overlayTitle = document.getElementById("overlayTitle");
+const overlaySlogan = document.getElementById("overlaySlogan");
+const overlayDesc = document.getElementById("overlayDesc");
+const overlayPoster = document.getElementById("overlayPoster");
+const overlayActions = document.getElementById("overlayActions");
+const searchInput = document.getElementById("searchInput");
+
+let sending = false;
+const pluginJsonCache = {};
+
+/* --- Content Visibility & Initialization --- */
+let mainContentLoaded = false;
+function showMainContent() {
+    if (mainContentLoaded) return;
+    mainContentLoaded = true;
+    document.querySelector('aside').style.display = 'flex';
+    document.querySelector('.main-area').style.display = 'block';
+}
+
+function checkExtensionAndInitialize() {
+    const versionElement = document.getElementById('versionnumber');
+    const versionString = versionElement ? versionElement.textContent.trim() : '0';
+    const version = parseFloat(versionString);
+
+    if (versionElement && version > 2.0) {
+        console.log(`Extension version ${version} detected. Initializing plugin store.`);
+        showMainContent();
+    } else {
+        console.warn(`Extension not detected or version is too old (${version}).`);
+        document.getElementById('loadingOverlay').classList.remove('visible');
+        document.getElementById('extensionWarning').style.display = 'flex';
+    }
+}
+
+
+let pluginsReadyFired = false;
+async function onPluginsReady() {
+    if (pluginsReadyFired) {
+        return;
+    }
+    pluginsReadyFired = true;
+    console.log("Plugins are ready. Firing initial render and setup.");
+
+    await renderGrid(searchInput.value.toLowerCase());
+
+    /* --- URL PARAMETER HANDLING --- */
+    const params = new URLSearchParams(window.location.search);
+    const queryName = params.get("q");
+    const queryAuthor = params.get("author");
+
+    if (!queryName || !queryAuthor) {
+        return;
+    }
+    
+    console.log(`URL PARAMS FOUND - Searching for plugin: "${queryName}" by "${queryAuthor}"`);
+    const list = Array.isArray(window.plugins) ? window.plugins : [];
+    let matched = null;
+
+    for (const p of list) {
+        let meta = null;
+        if (typeof p === 'string') {
+            meta = await fetchPluginJson(p);
+            if (!meta) continue;
+        } else if (Array.isArray(p)) {
+            const [name, slogan, poster, largePoster, desc, jsPath] = p;
+            meta = { name, slogan, poster, largePoster, desc, jsPath, version: "0", author: "" };
+        } else continue;
+
+        if ((!meta.author || meta.author === "") && meta.jsPath) {
+            const fallback = await fetchIntheckMetadata(meta.jsPath).catch(()=>null);
+            if (fallback) { meta.author = meta.author || fallback.author || ""; meta.version = meta.version || fallback.version || "0"; }
+        }
+
+        // ### NEW DEBUGGING LINE ADDED HERE ###
+        // This will show you exactly what is being compared in the console.
+        console.log(`Checking against: Name='${(meta.name || "").toLowerCase()}', Author='${(meta.author || "").toLowerCase()}'`);
+
+        if ((meta.name || "").toLowerCase() === queryName.toLowerCase() && (meta.author || "").toLowerCase() === queryAuthor.toLowerCase()) {
+            console.log(`SUCCESS: Match found for ${meta.name}. Expanding view.`);
+            matched = meta;
+            break;
+        }
+    }
+
+    if (!matched) {
+        console.warn(`URL SEARCH FAILED: Plugin not found for q="${queryName}", author="${queryAuthor}"`);
+        return;
+    }
+
+    const installedList = await getInstalledMetadata();
+    let btnHTML = `<button onclick="sendFile('${escapeAttr(matched.jsPath)}','${escapeAttr(matched.poster||'')}')">Install</button>`;
+
+    const existing = installedList.find(meta =>
+        (meta.name || "").toLowerCase() === (matched.name || "").toLowerCase() &&
+        (meta.author || "").toLowerCase() === (matched.author || "").toLowerCase()
+    );
+
+    if (existing) {
+        const cmp = versionCompare(matched.version, existing.version);
+        if (cmp === 0) {
+            btnHTML = `<div style="padding: 10px 18px; border: none; border-radius: 10px; font-weight: bold; cursor: default; background: transparent; color: #fff; width: 250px; height: 40px;">Already Installed ✅</div>`;
+        } else if (cmp > 0) {
+            btnHTML = `<button onclick="sendFile('${escapeAttr(matched.jsPath)}','${escapeAttr(matched.poster||'')}')">Update</button>`;
+        } else {
+            btnHTML = `<button onclick="sendFile('${escapeAttr(matched.jsPath)}','${escapeAttr(matched.poster||'')}')">Downgrade</button>`;
+        }
+    }
+    
+    showOverlay(matched.name, matched.slogan, matched.largePoster || matched.poster, matched.desc, matched.jsPath, btnHTML);
+}
+
+
+function createlisten(){ window.open("https://heckthetech.github.io/coolnewtab/pluginstore/submityourwork.html"); }
+function arrayBufferToBase64(buffer){ const bytes = new Uint8Array(buffer); let binary = ""; for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]); return btoa(binary); }
+async function urlToBase64(url){ const res = await fetch(url); if (!res.ok) throw new Error("Fetch failed: " + res.status); const buffer = await res.arrayBuffer(); return arrayBufferToBase64(buffer); }
+async function getInstalledMetadata() {
+  return new Promise(resolve => {
+    const req = indexedDB.open("plugindata", 1);
+    req.onupgradeneeded = e => { const db = e.target.result; if (!db.objectStoreNames.contains("plugins")) db.createObjectStore("plugins"); };
+    req.onsuccess = () => {
+      const db = req.result; if (!db.objectStoreNames.contains("plugins")) { db.close(); resolve([]); return; }
+      const tx = db.transaction("plugins", "readonly"), store = tx.objectStore("plugins"), getReq = store.get("all");
+      getReq.onsuccess = () => {
+        try { const raw = getReq.result || "", DELIM = "////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////", parsed = (raw || "").split(DELIM).map(s => s.trim()).filter(s => s.length > 0).map(parseMetadata).filter(Boolean); resolve(parsed); } catch (e) { resolve([]); }
+      }; getReq.onerror = () => resolve([]);
+    }; req.onerror = () => resolve([]);
+  });
+}
+function parseMetadata(raw) {
+  const meta = {};
+  try {
+    const nameMatch = raw.match(/pluginname\{([^}]+)\}/i), versionMatch = raw.match(/version\{([^}]+)\}/i), authorMatch = raw.match(/Author\{([^}]+)\}/i) || raw.match(/author\{([^}]+)\}/i);
+    if (nameMatch) meta.name = nameMatch[1].trim(); if (versionMatch) meta.version = versionMatch[1].trim(); if (authorMatch) meta.author = authorMatch[1].trim();
+    meta.raw = raw; return meta;
+  } catch { return null; }
+}
+function versionCompare(v1 = "0", v2 = "0") {
+  const a = String(v1).split('.').map(n => parseInt(n||0,10)), b = String(v2).split('.').map(n => parseInt(n||0,10));
+  for (let i=0;i<Math.max(a.length,b.length);i++){ const n1 = a[i] || 0, n2 = b[i] || 0; if (n1 > n2) return 1; if (n1 < n2) return -1; } return 0;
+}
+async function fetchPluginJson(jsonPath) {
+  if (!jsonPath) return null; if (pluginJsonCache[jsonPath]) return pluginJsonCache[jsonPath];
+  try {
+    const res = await fetch(jsonPath); if (!res.ok) throw new Error('Fetch failed ' + res.status); const j = await res.json();
+    const norm = { name: j.storetitle || j.pluginname || j.title || "", slogan: j.storeshortdescription || "", desc: j.storelongdescription || "", poster: j.storeimg1 || j.storeimg || j.poster || "", largePoster: j.storeimg2 || j.storeimg2 || j.largePoster || j.storeimg1 || "", jsPath: j.currentfile || j.currentfile || j.currentfile, version: j.currentversion || j.version || "0", author: j.author || j.Author || j.storeauthor || "" };
+    pluginJsonCache[jsonPath] = norm; return norm;
+  } catch (e) { pluginJsonCache[jsonPath] = null; return null; }
+}
+async function fetchIntheckMetadata(fileUrl) {
+  try {
+    const res = await fetch(fileUrl);
+    if (!res.ok) return null;
+    const txt = await res.text();
+    const nameMatch = txt.match(/pluginname\{([^}]+)\}/i);
+    const versionMatch = txt.match(/version\{([^}]+)\}/i);
+    const authorMatch = txt.match(/Author\{([^}]+)\}/i) || txt.match(/author\{([^}]+)\}/i);
+    return {
+      name: nameMatch?.[1]?.trim() || "",
+      version: versionMatch?.[1]?.trim() || "0",
+      author: authorMatch?.[1]?.trim() || ""
+    };
+  } catch (e) {
+    return null;
+  }
+}
+async function renderGrid(filter = "") {
+  grid.innerHTML = ""; const installed = await getInstalledMetadata(), list = Array.isArray(window.plugins) ? window.plugins : [];
+  for (const entry of list) {
+    let meta = null;
+    if (typeof entry === 'string') { meta = await fetchPluginJson(entry); if (!meta) continue; } 
+    else if (Array.isArray(entry)) { const [name, slogan, poster, largePoster, desc, jsPath] = entry; meta = { name, slogan, poster, largePoster, desc, jsPath, version: "0", author: "" }; } 
+    else { continue; }
+    const nameLower = (meta.name || "").toLowerCase(), sloganLower = (meta.slogan || "").toLowerCase();
+    if (filter && !nameLower.includes(filter) && !sloganLower.includes(filter)) continue;
+    if ((!meta.author || !meta.version) && meta.jsPath) {
+      const fallback = await fetchIntheckMetadata(meta.jsPath).catch(()=>null);
+      if (fallback) { meta.author = meta.author || fallback.author || ""; meta.version = meta.version || fallback.version || "0"; meta.name = meta.name || fallback.name || meta.name; }
+    }
+    let cardClass = "plugin-card", btnHTML = `<button onclick="sendFile('${escapeAttr(meta.jsPath)}','${escapeAttr(meta.poster || '')}')">Install</button>`;
+    if (meta && meta.name) {
+      const installedPlugin = installed.find(i => (i.name || "").toLowerCase() === (meta.name || "").toLowerCase());
+      if (installedPlugin) {
+        const cmp = versionCompare(meta.version, installedPlugin.version || "0");
+        if (cmp === 0 && (meta.author || "") === (installedPlugin.author || "")) { cardClass += " installed-same-version"; btnHTML = `<div style="padding: 10px 18px; border: none; border-radius: 10px; font-weight: bold; cursor: default; background: transparent; color: #fff; width: 250px; height: 40px;">Already Installed ✅</div>`; }
+        else if (cmp > 0) { cardClass += " installed-update-available"; btnHTML = `<button onclick="sendFile('${escapeAttr(meta.jsPath)}','${escapeAttr(meta.poster || '')}')">Update</button>`; }
+        else if (cmp < 0) { cardClass += " installed-downgrade-available"; btnHTML = `<button onclick="sendFile('${escapeAttr(meta.jsPath)}','${escapeAttr(meta.poster || '')}')">Downgrade</button>`; }
+      }
+    }
+    const card = document.createElement("div"); card.className = cardClass;
+    card.innerHTML = `<img class="poster" src="${escapeAttr(meta.poster || '')}" alt="${escapeAttr(meta.name || '')} poster" /><img class="larposter" src="${escapeAttr(meta.largePoster || meta.poster || '')}" alt="${escapeAttr(meta.name || '')} poster" /><div class="plugin-content"><h3>${escapeHtml(meta.name || '')} ${cardClass.includes("installed-same-version") ? `<code style="background:#2a3a3a; padding:4px 6px; border-radius:4px; display:inline-block; margin:6px 0; color:#a0d8cc;">Installed</code>` : ``}</h3><p class="slogan">${escapeHtml(meta.slogan || '')}</p><div class="plugin-actions"><button class="view-btn">View</button></div></div>`;
+    card.addEventListener("click", () => { showOverlay(meta.name, meta.slogan, meta.largePoster || meta.poster, meta.desc || "", meta.jsPath, btnHTML); });
+    const viewBtn = card.querySelector(".view-btn");
+    if (viewBtn) { viewBtn.addEventListener("click", e => { e.stopPropagation(); showOverlay(meta.name, meta.slogan, meta.largePoster || meta.poster, meta.desc || "", meta.jsPath, btnHTML); }); }
+    grid.appendChild(card);
+  }
+  document.getElementById('loadingOverlay').classList.remove('visible');
+}
+function showOverlay(name, slogan, poster, desc, jsPath, btnHTML) {
+  overlayTitle.textContent = name || ""; overlaySlogan.textContent = slogan || ""; overlayPoster.src = poster || ""; overlayDesc.innerHTML = desc || "";
+  overlayActions.innerHTML = `${btnHTML} <button onclick="downloadPlugin('${escapeAttr(jsPath)}')">Download</button>`;
+  overlay.classList.add('active'); overlaybg.classList.add('active'); overlay.focus();
+}
+overlayClose.addEventListener('click', () => { overlay.classList.remove('active'); overlaybg.classList.remove('active'); });
+overlaybg.addEventListener('click', () => { overlay.classList.remove('active'); overlaybg.classList.remove('active'); });
+window.addEventListener('keydown', e => { if (e.key === "Escape" && overlay.classList.contains('active')) { overlay.classList.remove('active'); overlaybg.classList.remove('active'); }});
+function downloadPlugin(jsPath) { if (!jsPath) return; const a = document.createElement('a'); a.href = jsPath; a.download = jsPath.split("/").pop(); document.body.appendChild(a); a.click(); a.remove(); }
+async function sendFile(fileUrl, logoUrl) {
+  if (sending) return; const loader = document.getElementById('loadingOverlay'); loader.classList.add('visible'); sending = true;
+  try {
+    const base64Plugin = await urlToBase64(fileUrl), base64Logo = logoUrl ? await urlToBase64(logoUrl) : "", fileName = (fileUrl || "").split('/').pop() || "Unnamed Plugin";
+    window.postMessage({ type: "send-int-plugin-to-install-heck", base64Data: base64Plugin, fileName, logo: base64Logo }, "*");
+  } catch (e) { console.warn("[sendFile error]", e); } finally { sending = false; loader.classList.remove('visible'); }
+}
+function escapeAttr(s) { if (!s && s !== 0) return ""; return String(s).replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+function escapeHtml(s){ if (!s && s !== 0) return ""; return String(s).replace(/[&<>"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]; }); }
+window.addEventListener("message", (event) => {
+  if (event.data?.type === "injectPluginData") {
+    showMainContent();
+    const pluginRaw = event.data.data;
+    if (!pluginRaw || pluginRaw.length === 0) {
+      const deleteRequest = indexedDB.deleteDatabase("plugindata");
+      deleteRequest.onsuccess = () => { window.plugins = []; renderGrid(searchInput.value.toLowerCase()); }; return;
+    }
+    const dbReq = indexedDB.open("plugindata", 1);
+    dbReq.onupgradeneeded = e => { const db = e.target.result; if (!db.objectStoreNames.contains("plugins")) db.createObjectStore("plugins"); };
+    dbReq.onsuccess = e => {
+      const db = e.target.result; const tx = db.transaction("plugins", "readwrite"), store = tx.objectStore("plugins"); store.put(pluginRaw, "all");
+      tx.oncomplete = () => { try { window.plugins = JSON.parse(pluginRaw); } catch (err) { window.plugins = pluginRaw; } renderGrid(searchInput.value.toLowerCase()); };
+    };
+  }
+});
+searchInput.addEventListener("input", () => { const val = searchInput.value.toLowerCase(); renderGrid(val); });
+
+function waitForExtensionElement() {
+    let attempts = 50;
+    const intervalTime = 100;
+    const interval = setInterval(() => {
+        const versionElement = document.getElementById('versionnumber');
+        if (versionElement) {
+            console.log("Found extension element #versionnumber.");
+            clearInterval(interval);
+            checkExtensionAndInitialize();
+        } else {
+            attempts--;
+            if (attempts <= 0) {
+                console.warn("#versionnumber not found after 5 seconds. Assuming extension is not installed.");
+                clearInterval(interval);
+                checkExtensionAndInitialize();
+            }
+        }
+    }, intervalTime);
+}
+waitForExtensionElement();
+
+</script>
+</body>
+</html>
