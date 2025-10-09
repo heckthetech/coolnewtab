@@ -1,0 +1,10 @@
+{
+  "storetitle": "Force Yahoo Search Engine",
+  "storeshortdescription": "force Yahoo to be the default Search engine",
+  "storelongdescription": "<h2 style='color:#a0d8cc; font-size:26px; margin-bottom:8px;'>Force Yahoo Search Engine</h2>\n<p style='font-size:16px; color:#e0e0e0; line-height:1.5;'>\n  Set Yahoo as your default search engine across your browsing experience, overriding any other search engine settings.  \n</p>\n<p style='font-size:16px; color:#e0e0e0; line-height:1.5;'>\n  This plugin ensures all search queries use Yahoo, giving you consistent results and a familiar search interface.\n</p>\n",
+  "storeimg1": "https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/forceyahoosearchengine/yahoo.webp",
+  "storeimg2": "https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/forceyahoosearchengine/yahool.jpg",
+  "currentfile": "https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/forceyahoosearchengine/forceyahoosearchengine.intheck",
+  "currentversion": "1.1",
+  "author": "Heck"
+}
