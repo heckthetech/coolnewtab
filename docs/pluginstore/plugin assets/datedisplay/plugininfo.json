@@ -2,8 +2,8 @@
   "storetitle": "Date Display Plugin",
   "storeshortdescription": "Add a Date widget to your New Tab Page",
   "storelongdescription": "<h2 style='color:#a0d8cc; font-size:26px; margin-bottom:8px;'>Date Display Plugin</h2>\n<p style='font-size:16px; color:#e0e0e0; line-height:1.5;'>\n  Add a stylish and customizable date widget to your layout. It displays the current date using your preferred format.\n</p>\n\n<p style='font-size:16px; color:#e0e0e0; line-height:1.5;'>\n  You can customize the date format by setting:<br>\n  <code style='background:#2a3a3a; padding:4px 6px; border-radius:4px; color:#a0d8cc;'>loadtextfrom(date.format = 'dd/mm day')</code><br>\n  Replace the format string with any combination of the supported tokens below.\n</p>\n\n<p style='font-size:15px; color:#f0c674; margin-top:10px;'><strong>Supported Format Tokens:</strong></p>\n<ul style='font-size:15px; color:#e0e0e0; line-height:1.4; margin-left:20px;'>\n  <li><code>dd</code> = Day number (01–31)</li>\n  <li><code>mm</code> = Month number (01–12)</li>\n  <li><code>mtext</code> = Full month name (e.g., June)</li>\n  <li><code>mtxt</code> = Short month name (e.g., Jun)</li>\n  <li><code>yyyy</code> = Full year (e.g., 2025)</li>\n  <li><code>yy</code> = Short year (e.g., 25)</li>\n  <li><code>dayname</code> = Full weekday name (e.g., Friday)</li>\n  <li><code>day</code> = Short weekday name (e.g., Fri)</li>\n</ul>",
-  "storeimg1": "https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/datedisplay/limadjust.jpg",
-  "storeimg2": "https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/datedisplay/limadjust.jpg",
+  "storeimg1": "https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/datedisplay/dat.jpg",
+  "storeimg2": "https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/datedisplay/datp.png",
   "currentfile": "https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/datedisplay/DateDisplay.intheck",
   "currentversion": "1.0",
   "author": "Heck"
