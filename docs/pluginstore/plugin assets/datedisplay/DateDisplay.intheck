@@ -1,4 +1,4 @@
-//pluginname{DateDisplay}version{1.0}Author{Heck}
+//pluginname{DateDisplay}version{1.1}Author{Heck}autoupdate{"https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/datedisplay/plugininfo.json"}
 
 default localstorage.drag_dateWidget = 115,15;
 
@@ -15,3 +15,4 @@ create div with id(#dateWidget) ^^
   </style>
   <h1 id="dateDisplay" dragmovable="0,0,stored">loadtextfrom(date.format="dd/mm day")</h1>
 ^^;
+
