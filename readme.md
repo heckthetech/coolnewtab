@@ -19,7 +19,7 @@ A sleek, fast, and customizable new tab experience for your browser — optimize
 
 **OR** download manually:
 
-[![Latest stable release - Download](https://img.shields.io/badge/Latest%20stable%20Release%20-%20Download%20Zip-blue?style=for-the-badge&logo=github)](https://github.com/heckthetech/coolnewtab/releases/download/v2.2.1/cool-newtab_v2.2.1_stable_release.zip)
+[![Latest stable release - Download](https://img.shields.io/badge/Latest%20stable%20Release%20-%20Download%20Zip-blue?style=for-the-badge&logo=github)](https://github.com/heckthetech/coolnewtab/releases/download/v2.4.1/cool-newtab_v2.4.1_stable_release.zip)
 
 After downloading:
 - Unzip the file  
