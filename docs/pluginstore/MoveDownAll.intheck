@@ -1,4 +1,0 @@
-//pluginname{MoveDownAll}version{1.0}Author{Heck}
-set override css = ^^
-  #bodyb {margin-bottom:-40px;}
-^^;
