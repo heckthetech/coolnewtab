@@ -35,4 +35,4 @@ See the [Releases](https://github.com/heckthetech/coolnewtab/releases) page for 
 
 ## Contact
 
-[![report_or_give_feedback-{heck}](https://img.shields.io/badge/report_or_give_feedback-%7Bheck%7D-blue?logo=github&style=for-the-badge)](https://github.com/heckthetech/report)
+[![report_or_give_feedback-{heck}](https://img.shields.io/badge/report_or_give_feedback-%7Bheck%7D-blue?logo=github&style=for-the-badge)](https://heckthetech.github.io/report/)
