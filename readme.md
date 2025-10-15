@@ -16,6 +16,7 @@ A sleek, fast, and customizable new tab experience for your browser — optimize
 ## Installation
 
 [![Get it on Edge](https://heckthetech.github.io/coolnewtab/useless/getonedge.png)](https://microsoftedge.microsoft.com/addons/detail/cool-new-tab/felhaffgopblgagelfogooobffpmcbjj)
+[![Get it on Chrome](https://heckthetech.github.io/coolnewtab/useless/getonchrome.png)](https://chromewebstore.google.com/detail/cool-new-tab/omncapjeakhcnfcimonjipchlcegbeed)
 
 **OR** download manually:
 
