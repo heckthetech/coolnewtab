@@ -20,13 +20,21 @@ A sleek, fast, and customizable new tab experience for your browser — optimize
 
 **OR** download manually:
 
-[![Latest stable release - Download](https://img.shields.io/badge/Latest%20stable%20Release%20-%20Download%20Zip-blue?style=for-the-badge&logo=github)](https://github.com/heckthetech/coolnewtab/releases/download/v2.4.1/cool-newtab_v2.4.1_stable_release.zip)
+[![Latest stable release - Download](https://img.shields.io/badge/Latest%20stable%20Release%20-%20Download%20Crx-blue?style=for-the-badge&logo=github)](https://github.com/heckthetech/coolnewtab/releases/download/v2.4.2/cool-newtab_v2.4.2_stable_revised_release.crx)
+
+[![Latest stable release - Download](https://img.shields.io/badge/Latest%20stable%20Release%20-%20Download%20Zip-blue?style=for-the-badge&logo=github)](https://github.com/heckthetech/coolnewtab/releases/download/v2.4.2/cool-newtab_v2.4.2_stable_revised_release.zip)
 
 After downloading:
+**For .zip file**
 - Unzip the file  
-- On any Chromium browser (Chrome, Edge, Brave, etc.)  
+- Must use any Chromium browser (Chrome, Edge, Brave, etc.)  
 - Open **Extensions** → Enable **Developer Mode**  
 - Click **Load unpacked** → Select the unzipped folder  
+
+**For .crx file**
+- Must use any Chromium browser (Chrome, Edge, Brave, etc.)  
+- Open **Extensions** → Enable **Developer Mode**  
+- Drag and drop the extensionfile.crx and enable it.  
 
 ## Release Notes
 
