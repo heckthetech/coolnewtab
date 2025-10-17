@@ -25,6 +25,7 @@ A sleek, fast, and customizable new tab experience for your browser — optimize
 [![Latest stable release - Download](https://img.shields.io/badge/Latest%20stable%20Release%20-%20Download%20Zip-blue?style=for-the-badge&logo=github)](https://github.com/heckthetech/coolnewtab/releases/download/v2.4.2/cool-newtab_v2.4.2_stable_revised_release.zip)
 
 After downloading:
+
 **For .zip file**
 - Unzip the file  
 - Must use any Chromium browser (Chrome, Edge, Brave, etc.)  
