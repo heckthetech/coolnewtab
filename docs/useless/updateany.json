@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
-  "updatedateid": "26sep2025",
+  "updatedateid": "31oct2025",
   "count": "1",
   "importance": "6",
-  "importancelist":{"list":"1:💁‍♂️  2:🔔 3:ℹ️ 4:✅ 5:⭐ 6:🔥 7:⚡ 8:❗ 9:🚨 10:⚠️"},
-  "header": "Hey there!",
-  "txt": "Say hello, to the new Update!<br> Check out new features and updates at <a href='https://github.com/heckthetech/coolnewtab/releases' target='_blank'>Changelog</a> 😉!", 
-  "media": {"none":"none"} 
+  "importancelist":{"list":"1:💁‍♂️  2:🔔 3:ℹ️ 4:✅ 5:⭐ 6:🎃 7:⚡ 8:❗ 9:🚨 10:⚠️"},
+  "header": "Boo!&nbsp;&nbsp;Did we scare you?",
+  "txt": "Be aware, spooky surprises might appear in your house if you believe it!<br>Keep your tab alive… if you dare! 💀", 
+  "media": {"img":"https://i.ibb.co.com/1JpKK6cC/boo.gif"} 
 }
