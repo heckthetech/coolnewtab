@@ -1,10 +1,10 @@
 {
   "manifest_version": 3,
   "updatedateid": "31oct2025",
-  "count": "4",
+  "count": "5",
   "importance": "6",
   "importancelist":{"list":"1:💁‍♂️  2:🔔 3:ℹ️ 4:✅ 5:⭐ 6:🎃 7:⚡ 8:❗ 9:🚨 10:⚠️"},
-  "header": "Boo!&nbsp;&nbsp;&nbsp;Please be scared 👻",
+  "header": "Boo!&nbsp;&nbsp;Please be scared 👻",
   "txt": "I’m as spooky as the secrets you keep… <br>let them gently haunt you tonight with spooky vibes. 💀", 
   "media": {"img":"https://i.ibb.co.com/1JpKK6cC/boo.gif"} 
 }
