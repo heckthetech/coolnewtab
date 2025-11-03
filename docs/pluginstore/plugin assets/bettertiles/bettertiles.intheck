@@ -1,4 +1,4 @@
-//pluginname{BetterTiles}version{1.5}Author{Heck}autoupdate{"https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/bettertiles/plugininfo.json"}
+//pluginname{BetterTiles}version{1.6}Author{Heck}autoupdate{"https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/bettertiles/plugininfo.json"}
 
 
 set override css = ^^
@@ -38,6 +38,7 @@ set override css = ^^
     position: absolute !important;
     top: 5% !important;
     left: 30% !important;
+    border-radius:12px !important;
 }
 .tile-title {
        white-space: nowrap !important;
@@ -58,5 +59,6 @@ set override css = ^^
 
 
  
+
 
 
