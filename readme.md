@@ -20,7 +20,7 @@ A sleek, fast, and customizable new tab experience for your browser — optimize
 
 **OR** download manually:
 
-[![Latest stable release - Download](https://img.shields.io/badge/Latest%20stable%20Release%20-%20Download%20Crx-blue?style=for-the-badge&logo=github)](https://github.com/heckthetech/coolnewtab/releases/download/v2.4.2/cool-newtab_v2.4.2_stable_revised_release.crx) [![Latest stable release - Download](https://img.shields.io/badge/Latest%20stable%20Release%20-%20Download%20Zip-blue?style=for-the-badge&logo=github)](https://github.com/heckthetech/coolnewtab/releases/download/v2.4.2/cool-newtab_v2.4.2_stable_revised_release.zip)
+[![Latest stable release - Download](https://img.shields.io/badge/Latest%20stable%20Release%20-%20Download%20Crx-blue?style=for-the-badge&logo=github)](https://github.com/heckthetech/coolnewtab/releases/download/v2.5.0/cool-newtab_v2.5.0_stable_release.crx) [![Latest stable release - Download](https://img.shields.io/badge/Latest%20stable%20Release%20-%20Download%20Zip-blue?style=for-the-badge&logo=github)](https://github.com/heckthetech/coolnewtab/releases/download/v2.5.0/cool-newtab_v2.5.0_stable_release.zip)
 
 After downloading:
 
