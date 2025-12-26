@@ -1,4 +1,4 @@
-//pluginname{BetterTiles}version{1.9}Author{Heck}autoupdate{"https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/bettertiles/plugininfo.json"}
+//pluginname{BetterTiles}version{2.0}Author{Heck}autoupdate{"https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/bettertiles/plugininfo.json"}
 //turned{on}
 
 
@@ -19,6 +19,7 @@ set override css = ^^
     gap: 10px !important;
     text-align: left !important;
     background-color: #ffffff00 !important;
+    backdrop-filter:none !important;
     padding: 15px 30px !important;
     border-radius: 20px !important;
     text-decoration: none !important;
@@ -27,7 +28,9 @@ set override css = ^^
     font-weight: 500 !important;
     box-shadow: none !important;
     transition: background 0.3s ease, transform 0.2s ease !important;
-    user-select: none; !important}
+    user-select: none !important;
+    filter:drop-shadow(2px 2px 1px rgb(0 0 0 / 40%)) !important;
+}
 
 .tile img {
     width: auto !important;
