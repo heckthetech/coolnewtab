@@ -1,0 +1,73 @@
+//pluginname{Edge aligned layout}version{1.0}Author{Heck}autoupdate{"https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/edgealignedlayout/plugininfo.json"}
+//turned{on}
+
+enable layoutcustom;
+enable bookmarkcustom;
+set localstorage.MAX_BOOKMARKS = 6;
+set localstorage.layoutPattern = 1,1,1,1,1,1;
+
+
+set override css = ^^
+  #digitalClock {
+    position: fixed;
+    bottom: 35px;
+    left: 25px;
+    font-size: 40px;
+}
+
+.search-bar {
+    width: 30%;
+    position: fixed !important;
+    left: 20px;
+    bottom: 10px;
+}
+
+#dateDisplay{font-size:20px;}
+
+#suggestions{
+    position: fixed !important;
+    left: 20px;
+    bottom: 65px;
+    width:30%;}
+#urlTabHint{font-size:10px !important;}
+#manageToggle{width: 25px;height: 25px;}
+#manageToggle svg,#wallpaperBtn svg , #settingsBtn svg {width: 13px;height: 13px;}
+
+#tilesContainer{
+    position: fixed;
+    height: 100%;
+    right: 0;
+    top: 0;
+    display:block;
+}
+.tile-title{display:none !important;}
+
+.tile{
+    min-width: 50px;
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    box-shadow: none;
+    height:70px !important;
+    padding: 5px;
+    padding-left: 0px;
+    margin-left: 15px;
+    margin-top:10px;
+}
+
+.tile img{width:40px !important;height:auto !important;}
+
+.tile:hover{transform:scale(1.2);background-color:transparent;}
+
+#wallpaperBtn,#settingsBtn{
+    bottom: 65px;
+    right: 35px;
+    width: 18px;
+    height: 18px;
+}
+
+#settingsBtn{
+    margin-right: 30px !important;
+    bottom: 30px !important;
+}
+^^;
