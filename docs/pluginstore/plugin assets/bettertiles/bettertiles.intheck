@@ -1,4 +1,4 @@
-//pluginname{BetterTiles}version{1.8}Author{Heck}autoupdate{"https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/bettertiles/plugininfo.json"}
+//pluginname{BetterTiles}version{1.9}Author{Heck}autoupdate{"https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/bettertiles/plugininfo.json"}
 //turned{on}
 
 
@@ -8,6 +8,7 @@ set override css = ^^
   }
 
 .tile {
+    border:none !important;
     position: relative !important;
     width: 100px !important;
     height: 90px !important;
@@ -17,9 +18,6 @@ set override css = ^^
     margin-left: 20px !important;
     gap: 10px !important;
     text-align: left !important;
-}
-
-.tile {
     background-color: #ffffff00 !important;
     padding: 15px 30px !important;
     border-radius: 20px !important;
@@ -41,6 +39,7 @@ set override css = ^^
     left: 30% !important;
     border-radius:12px !important;
     max-width:45%;
+    transition: scale linear 100ms ;
 }
 .tile-title {
     white-space: nowrap !important;
@@ -55,6 +54,5 @@ set override css = ^^
     left: 0% !important;
 }
 
-.tile img {transition: scale linear 100ms ;}
 .tile:hover img {scale:1.1;}
 ^^;
