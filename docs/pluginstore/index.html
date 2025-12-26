@@ -429,7 +429,23 @@ window.addEventListener("message", (event) => {
     dbReq.onupgradeneeded = e => { const db = e.target.result; if (!db.objectStoreNames.contains("plugins")) db.createObjectStore("plugins"); };
     dbReq.onsuccess = e => {
       const db = e.target.result; const tx = db.transaction("plugins", "readwrite"), store = tx.objectStore("plugins"); store.put(pluginRaw, "all");
-      tx.oncomplete = () => { try { window.plugins = JSON.parse(pluginRaw); } catch (err) { window.plugins = pluginRaw; } renderGrid(searchInput.value.toLowerCase()); };
+      tx.oncomplete = () => { 
+        // ------------------------- FIX START -------------------------
+        // Properly parse the raw string into an array using the delimiter
+        // This ensures the grid receives an Array, not a String
+        const DELIM = "////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////";
+        
+        if (typeof pluginRaw === "string" && pluginRaw.includes("pluginname{")) {
+           try {
+             window.plugins = (pluginRaw || "").split(DELIM).map(s => s.trim()).filter(s => s.length > 0).map(parseMetadata).filter(Boolean);
+           } catch(e) { window.plugins = []; }
+        } else {
+           try { window.plugins = JSON.parse(pluginRaw); } catch (err) { window.plugins = []; }
+        }
+        // ------------------------- FIX END -------------------------
+        
+        renderGrid(searchInput.value.toLowerCase()); 
+      };
     };
   }
 });
