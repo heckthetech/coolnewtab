@@ -1,5 +1,6 @@
 {
   "storetitle": "Move it down",
+  "actualtitle": "MoveDownAll",
   "storeshortdescription": "Move all your stuff a little bit down",
   "storelongdescription": "<h2 style='color:#a0d8cc; font-size:26px; margin-bottom:8px;'>Move It Down</h2>\n<p style='font-size:16px; color:#e0e0e0; line-height:1.5;'>\n  Move all your content slightly downward to improve layout or create space where needed.\n</p>\n<p style='font-size:16px; color:#e0e0e0; line-height:1.5;'>\n  You can customize the amount by adjusting the CSS margin value, for example:<br>\n  <code style='background:#2a3a3a; padding:4px 6px; border-radius:4px; color:#a0d8cc; display:inline-block;'>\n    #bodyb { margin-bottom: -80px; }\n  </code><br>\n  Change <code>-80px</code> to any value that fits your design.\n</p>",
   "storeimg1": "https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/MoveDownAll/move.png",
