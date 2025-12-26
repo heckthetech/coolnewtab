@@ -333,7 +333,9 @@ async function getInstalledMetadata() {
 function parseMetadata(raw) {
   const meta = {};
   try {
-    const nameMatch = raw.match(/pluginname\{([^}]+)\}/i), versionMatch = raw.match(/version\{([^}]+)\}/i), authorMatch = raw.match(/Author\{([^}]+)\}/i) || raw.match(/author\{([^}]+)\}/i);
+    // Optimization: Only check the first 5000 characters for metadata
+    const header = raw && raw.length > 5000 ? raw.slice(0, 5000) : raw;
+    const nameMatch = header.match(/pluginname\{([^}]+)\}/i), versionMatch = header.match(/version\{([^}]+)\}/i), authorMatch = header.match(/Author\{([^}]+)\}/i) || header.match(/author\{([^}]+)\}/i);
     if (nameMatch) meta.name = nameMatch[1].trim(); if (versionMatch) meta.version = versionMatch[1].trim(); if (authorMatch) meta.author = authorMatch[1].trim();
     meta.raw = raw; return meta;
   } catch { return null; }
@@ -355,9 +357,11 @@ async function fetchIntheckMetadata(fileUrl) {
     const res = await fetch(fileUrl);
     if (!res.ok) return null;
     const txt = await res.text();
-    const nameMatch = txt.match(/pluginname\{([^}]+)\}/i);
-    const versionMatch = txt.match(/version\{([^}]+)\}/i);
-    const authorMatch = txt.match(/Author\{([^}]+)\}/i) || txt.match(/author\{([^}]+)\}/i);
+    // Optimization: Only check the first 5000 characters
+    const header = txt.slice(0, 5000);
+    const nameMatch = header.match(/pluginname\{([^}]+)\}/i);
+    const versionMatch = header.match(/version\{([^}]+)\}/i);
+    const authorMatch = header.match(/Author\{([^}]+)\}/i) || header.match(/author\{([^}]+)\}/i);
     return {
       name: nameMatch?.[1]?.trim() || "",
       version: versionMatch?.[1]?.trim() || "0",
@@ -368,18 +372,44 @@ async function fetchIntheckMetadata(fileUrl) {
   }
 }
 async function renderGrid(filter = "") {
-  grid.innerHTML = ""; const installed = await getInstalledMetadata(), list = Array.isArray(window.plugins) ? window.plugins : [];
-  for (const entry of list) {
-    let meta = null;
-    if (typeof entry === 'string') { meta = await fetchPluginJson(entry); if (!meta) continue; } 
-    else if (Array.isArray(entry)) { const [name, slogan, poster, largePoster, desc, jsPath] = entry; meta = { name, slogan, poster, largePoster, desc, jsPath, version: "0", author: "" }; } 
-    else { continue; }
-    const nameLower = (meta.name || "").toLowerCase(), sloganLower = (meta.slogan || "").toLowerCase();
+  grid.innerHTML = ""; 
+  const installed = await getInstalledMetadata();
+  const list = Array.isArray(window.plugins) ? window.plugins : [];
+
+  // Prepare all metadata in parallel
+  const preparedItems = await Promise.all(list.map(async (entry) => {
+    try {
+        let meta = null;
+        if (typeof entry === 'string') { meta = await fetchPluginJson(entry); } 
+        else if (Array.isArray(entry)) { 
+             const [name, slogan, poster, largePoster, desc, jsPath] = entry; 
+             meta = { name, slogan, poster, largePoster, desc, jsPath, version: "0", author: "" }; 
+        } 
+        else { return null; }
+        
+        if (!meta) return null;
+
+        // Fetch fallback metadata if needed
+        if ((!meta.author || !meta.version) && meta.jsPath) {
+             const fallback = await fetchIntheckMetadata(meta.jsPath).catch(()=>null);
+             if (fallback) { 
+                 meta.author = meta.author || fallback.author || ""; 
+                 meta.version = meta.version || fallback.version || "0"; 
+                 meta.name = meta.name || fallback.name || meta.name; 
+             }
+        }
+        return meta;
+    } catch(e) { return null; }
+  }));
+
+  // Render valid items in order
+  for (const meta of preparedItems) {
+    if (!meta) continue;
+
+    const nameLower = (meta.name || "").toLowerCase();
+    const sloganLower = (meta.slogan || "").toLowerCase();
     if (filter && !nameLower.includes(filter) && !sloganLower.includes(filter)) continue;
-    if ((!meta.author || !meta.version) && meta.jsPath) {
-      const fallback = await fetchIntheckMetadata(meta.jsPath).catch(()=>null);
-      if (fallback) { meta.author = meta.author || fallback.author || ""; meta.version = meta.version || fallback.version || "0"; meta.name = meta.name || fallback.name || meta.name; }
-    }
+
     let cardClass = "plugin-card", btnHTML = `<button onclick="sendFile('${escapeAttr(meta.jsPath)}','${escapeAttr(meta.poster || '')}')">Install</button>`;
     if (meta && meta.name) {
       const installedPlugin = installed.find(i => (i.name || "").toLowerCase() === (meta.name || "").toLowerCase());
