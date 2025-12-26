@@ -1,5 +1,6 @@
 {
   "storetitle": "Better Tiles",
+  "actualtitle": "BetterTiles",
   "storeshortdescription": "Make BookMark Tiles look better",
   "storelongdescription": "<h2 style='color:#a0d8cc; font-size:26px; margin-bottom:8px;'>Better Tiles</h2>\n<p style='font-size:16px; color:#e0e0e0; line-height:1.5;'>\n  Make your bookmark tiles look cleaner, sharper, and more organized with enhanced layout styling and spacing adjustments.\n</p>\n<p style='font-size:15px; color:#f0c674; margin-top:10px;'>\n  Requires <a href='http://heckthetech.github.io/coolnewtab/pluginstore?q=limits%20Adjuster&author=heck' style='color:#80dfff; text-decoration:underline;'>Limit Adjuster</a> plugin to work properly.\n</p>\n",
   "storeimg1": "https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/bettertiles/better.jpg",
