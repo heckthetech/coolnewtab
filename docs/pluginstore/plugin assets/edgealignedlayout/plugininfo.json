@@ -1,0 +1,11 @@
+{
+  "storetitle": "Edge Aligned Layout Design",
+  "actualtitle": "Edge aligned layout",
+  "storeshortdescription": "Makes Newtab page edge aligned while center is empty",
+  "storelongdescription": "<h2 style='color:#a0d8cc; font-size:28px; margin-bottom:10px;'>Edge Aligned Layout</h2> <p style='font-size:16px; color:#e0e0e0; line-height:1.5;'> This layout aligns all content of your Newtab page to the edges while keeping the center empty for a clean, sleek and spacious look. </p><h3 style='color:#ff8364; font-size:22px; margin-top:20px;'>Features</h3><ul style='font-size:15px; color:#e0e0e0; line-height:1.4;'> <li>Pushes bookmarks, widgets, and other content to the top, bottom, and sides of the page.</li> <li>Leaves the center free for a minimal, distraction-free experience.</li> <li>Compatible with most plugins, but some layout modifiers may cause conflicts.</li> </ul> <h3 style='color:#ff8364; font-size:22px; margin-top:20px;'>Customization</h3> <p style='font-size:16px; color:#e0e0e0; line-height:1.5;'> <strong>Bookmarks</strong>  <br> Adjust the max bookmars and listing sequence:<br>   <code style='background:#2a3a3a; padding:4px 6px; border-radius:4px; display:inline-block; margin:6px 0; color:#a0d8cc;'>set localstorage.MAX_BOOKMARKS = 6;<br>set localstorage.layoutPattern = 1,1,1,1,1,1;</code><br>   Replace <code style='color:#a0d8cc;'>6 & 1,1,1,1,1,1</code> with your preferred values to add more or reduce bookmark tiles. </p>      <h3 style='color:#ff8364; font-size:22px; margin-top:20px;'>Plugin Conflicts</h3> <p style='font-size:16px; color:#f0c674; line-height:1.5;'> You should turn off <a href='http://heckthetech.github.io/coolnewtab/pluginstore?q=limits%20Adjuster&author=heck' style='color:#80dfff; text-decoration:underline;'>Limit Adjuster</a> plugin to avoid layout conflicts. </p>",
+  "storeimg1": "https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/edgealignedlayout/eald.png",
+  "storeimg2": "https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/edgealignedlayout/ealdl.png",
+  "currentfile": "https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/edgealignedlayout/edgealignedlayout.intheck",
+  "currentversion": "1.0",
+  "author": "Heck"
+}
