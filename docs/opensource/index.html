@@ -1,237 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy – Cool New Tab</title>
   <style>
     :root {
-      --bg: #1a1a1d;
-      --card: #2a2a2d;
-      --text: #f5f5f5;
-      --accent: #ffb3ec;
-      --primary: #b388ff;
-      --soft: #3a3a40;
-      --muted: #aaa;
-      --radius: 20px;
-      --font: 'Segoe UI', 'Nunito', sans-serif;
+      --bg: #0b0b0b;
+      --text: #f4f4f4;
+      --muted: #bdbdbd;
+      --line: #242424;
+      --soft: #161616;
+      --btn-hover: #2a2a2a;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font);
-      margin: 0;
-      padding: 0;
+      padding: 40px 20px 64px;
+      line-height: 1.75;
+      font-size: 16px;
     }
 
-   header {
- background: #00000012;
-  padding: 1.5rem 1.2rem;
-  font-size: 1.1rem;
-  font-weight: 900;
-  color: #fff;
-  border-radius: 20px;
-  letter-spacing: 1.2px;
-  max-width: 300px;
-  user-select: none;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-  transition: box-shadow 0.3s ease;
-  margin: 0 0 2rem 0;
-  text-align: left;
-}
-
-header:hover {
-  text-shadow:    0 2px 20px rgba(255, 3, 3, 0.6);
-  cursor: default;
-}
-
-    main {
-         max-width: 800px;
-    margin: 2rem auto;
-    padding: 1rem 2rem;
-    background: var(--card);
-    border-radius: var(--radius);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+    .wrap {
+      width: min(800px, 100%);
+      margin: 0 auto;
     }
 
     h1 {
-      text-align: center;
-      font-size: 2.2rem;
-      color: var(--primary);
-      margin-bottom: 1.5rem;
+      margin: 0 0 14px;
+      font-size: clamp(2.2rem, 4.4vw, 3.2rem);
+      line-height: 1.06;
+      letter-spacing: -0.05em;
+      font-weight: 800;
     }
 
     h2 {
-      font-size: 1.4rem;
-      color: var(--accent);
-      margin-top: 2rem;
+      margin: 34px 0 16px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 900px;
+      margin-bottom: 34px;
     }
 
     p {
-      font-size: 1.05rem;
-      line-height: 1.8;
-      color: var(--text);
-      margin: 0.8rem 0;
-    }
-
-    a {
-      color: var(--accent);
-      font-weight: bold;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    a:hover {
-      text-decoration: underline;
-      filter: none;
-      color: var(--accent);
-    }
-
-    .card {
-      background: var(--soft);
-      padding: 1.2rem 1rem;
-      border-radius: var(--radius);
-      margin: 1rem 0;
-      cursor: default;
-      transition: transform 0.3s ease;
-      box-shadow: none;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: none;
-    }
-
-    footer {
-      text-align: center;
-      margin: 2rem auto;
+      margin: 0 0 16px;
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 1rem;
+      line-height: 1.7;
     }
 
-    @media (max-width: 600px) {
-      main {
-        padding: 1.5rem 1rem;
-        margin: 1rem;
-      }
+    strong, b {
+      color: var(--text);
+      font-weight: 600;
     }
 
+    ul {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    a.text-link {
+      color: var(--text);
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.2s ease;
+    }
+
+    a.text-link:hover {
+      color: #fff;
+    }
+
+    .policy-card {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      padding: 24px 30px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .policy-card:hover {
+      transform: translateY(-2px);
+      border-color: #444;
+    }
+
+    .policy-card p:last-child,
+    .policy-card ul:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Action Links Section Styles */
+    .action-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin: 40px 0 30px;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      background: var(--line);
+      color: var(--text);
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: background 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 50px;
+    }
+
+    .action-btn:hover {
+      background: var(--btn-hover);
+    }
+
+    .footer {
+      margin-top: 40px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+      font-size: 0.95rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* Custom Interpreter Element Styles - Professional Redesign */
     interp {
-      display: inline-block;
-      width: 180px;
-      height: 40px;
-      background: linear-gradient(135deg, #fa045287, #e46700);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 12px;
+      background: var(--bg);
       position: relative;
-      font-family: 'Segoe UI', sans-serif;
       border-radius: 6px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-      vertical-align: text-bottom;
-      margin: 0px 6px;
-      animation: glowPulse 1.5s infinite ease-in-out;
-      transform-origin: center;
-      cursor: default;
+      border: 1px solid var(--line);
+      vertical-align: middle;
+      margin: 0 6px;
+      transition: all 0.2s ease;
     }
 
     interp::after {
       content: "Interpreter JS";
-      position: absolute;
-      bottom: 0px;
-      right: 6px;
-      font-weight: 900;
-      font-size: 1.4rem;
-      color: #ebebeb;
-      letter-spacing: -1px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--muted);
+      transition: color 0.2s ease;
     }
 
- @keyframes glowPulse {
-  0%, 100% {
-    box-shadow:
-      0 0 6px 2px rgba(250, 4, 82, 0.6),
-      0 0 12px 4px rgba(228, 103, 0, 0.4);
-    transform: scale(1);
-  }
-  50% {
-    box-shadow:
-      0 0 12px 4px rgba(250, 4, 82, 0.9),
-      0 0 24px 8px rgba(228, 103, 0, 0.6);
-    transform: scale(1.05);
-  }
-}
-
-@keyframes glowstatic {
-  0%, 100% {
-    box-shadow:
-      0 0 12px 4px rgba(250, 4, 82, 0.9),
-      0 0 24px 8px rgba(228, 103, 0, 0.6);
-    transform: scale(1.1);
-  }
-  50% {
-    box-shadow:
-      0 0 12px 4px rgba(250, 4, 82, 0.9),
-      0 0 24px 8px rgba(228, 103, 0, 0.6);
-    transform: scale(1.1);
-  }
-}
-
-
-
     interp:hover {
-      margin: 0px 6px;
-      animation: glowstatic 1.5s infinite ease-in-out;
-      border: solid black 1px;
+      border-color: #555;
+      background: var(--soft);
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+      transform: translateY(-1px);
     }
 
     interp:hover::after {
-      color: #111;
+      color: var(--text);
     }
 
-    @keyframes headerGlow {
-      0%, 100% {
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
-      }
-      50% {
-        box-shadow: 0 4px 18px rgba(255, 179, 236, 0.5);
-      }
+    @media (max-width: 780px) {
+      body { padding: 28px 14px 52px; }
+      h1 { letter-spacing: -0.04em; }
+      .action-links { flex-direction: column; width: 100%; max-width: 300px; margin: 30px auto; }
+      .action-btn { justify-content: center; width: 100%; }
+      .footer { flex-direction: column; text-align: center; }
+      .policy-card { padding: 20px; }
     }
   </style>
 </head>
 <body>
- 
+  <main class="wrap">
+    <h1>Privacy Policy</h1>
+    <p class="lead">Transparency and respect for your digital space.</p>
 
-  <main>
-     <header>
-    Cool New Tab – Privacy Policy
-  </header>
-    <h1>We Respect Your Space</h1>
-
-    <div class="card">
-      <p><strong>Cool New Tab</strong> is a fun and open-source browser extension made with 💖 by <strong>{heck}</strong></p>
-      <p>It's your coool, customizable new tab page<br> with a built-in DIY plugin customization | all powered by <a href="https://heckthetech.github.io/coolnewtab/interpreterlanguage.html" style="text-decoration: none; color: auto;" target="_blank"><interp/></a></p>
+    <div class="policy-card">
+      <p><strong>Cool New Tab</strong> is an open-source browser extension developed by <strong>heckthetech</strong>. It is designed to be a fast, customizable new tab page with built-in DIY plugin capabilities powered by <a href="https://heckthetech.github.io/coolnewtab/interpreterlanguage.html" target="_blank" style="text-decoration: none;"><interp></interp></a></p>
+      <p>We believe in privacy by design. Core operations run locally on your device, but certain features require connecting to external services to function properly. This policy outlines exactly what data is processed and why.</p>
     </div>
 
-    <h2>🔐 Absolutely No Snooping!</h2>
-    <div class="card">
-      <p>Pinky promise 🤞 this extension collects <strong>zero</strong> data. No cookies. No trackers. No spooky scripts.</p>
-      <p>It runs entirely on your device, privately and offline <strong>with the tiny exception of <a href="https://github.com/heckthetech/favfetch/blob/main/api/favfetch.js" style="text-decoration: none;"><b>bookmark icon caching</b></a> and running <a href="https://heckthetech.github.io/coolnewtab/pluginstore/" style="text-decoration: none;"><b>plugin store</b></a></strong>. Your cute little browsing space is still yours alone.</p>
+    <h2>🖥️ Local by Default</h2>
+    <div class="policy-card">
+      <p>Almost entire part of the extension's functionality operates entirely within your browser. Your layout preferences, applied themes, custom scripts, and saved bookmarks are stored locally on your device. We do not collect, track, or sell your general browsing history, keystrokes, or personally identifiable information (PII).</p>
+      <p>We don't even store or reserve the data at all , it stays saved locally.</p>
     </div>
 
-    <h2>✨ Why Trustworthy?</h2>
-    <div class="card">
-      <p>Because it’s open-source! That means anyone (yes, even you smart pants!!) can check the code and confirm it's safe.</p>
-      <p>Check it out here: <a href="https://github.com/heckthetech/coolnewtab" target="_blank">https://github.com/heckthetech/coolnewtab/</a></p>
+    <h2>🌐 Internet Services & Data Processing</h2>
+    <div class="policy-card">
+      <p>To provide advanced aesthetic and productivity features, the extension connects to the following external services:</p>
+      <ul>
+        <li><strong>High-Quality Bookmark Icons (Favfetch):</strong> When you add a bookmark, the extension contacts our open-source <a href="https://github.com/heckthetech/favfetch" class="text-link" target="_blank">Favfetch server</a> to retrieve a high-quality icon. This request includes the <strong>domain name</strong> of the bookmark and your <strong>region data</strong> (used for future region-specific icon localization). If an icon is not found, our server logs the missing domain name so we can create and reserve an icon for it. We mostly use Google's favicon service as a backbone for icons that aren't specified in the server.</li>
+        <li><strong>Title Fetching:</strong> We utilize the third-party <a href="https://microlink.io/" class="text-link" target="_blank">Microlink API</a> to automatically fetch and format website titles when you save a new bookmark.</li>
+        <li><strong>"Did you mean?" Feature:</strong> To provide accurate search suggestions without tracking, this feature queries the DuckDuckGo HTML search engine directly from your local client.</li>
+        <li><strong>Plugin Store:</strong> Browsing and installing plugins from the website and for updates it require connecting to the plugin repository and again which is opensource too.</li>
+      </ul>
     </div>
 
-    <h2>🛠 Help Us Make It Even Cooler</h2>
-    <div class="card">
-      <p>This extension is maintained by a solo developer and open to community contributions. You can help by submitting issues, pull requests, <a href="https://heckthetech.github.io/report" target="_blank">Report Bug or feedback</a>.</p>
-      <p>We'd love your help! Visit the GitHub page and share your brilliance 💡</p>
+    <h2>✨ Open Source & Auditable</h2>
+    <div class="policy-card">
+      <p>Trust is earned through transparency. Both the core extension and our icon-fetching backend are entirely open-source. We encourage you to review the code to verify our privacy practices:</p>
+      <ul>
+        <li><a href="https://github.com/heckthetech/coolnewtab" class="text-link" target="_blank">Cool New Tab Extension Source</a></li>
+        <li><a href="https://github.com/heckthetech/favfetch" class="text-link" target="_blank">Favfetch Server Source</a></li>
+      </ul>
     </div>
 
-    <footer>
-       Made with 💖 by {heck} | Cool New Tab<br />
-      No ads. No data. Just you and your pixels 
-    </footer>
+    <h2>🛠 Policy Updates & Support</h2>
+    <div class="policy-card">
+      <p>As we add new features, we may update this policy to reflect any changes in data processing. But privacy priorities will stay forever unchanged.</p>
+      <p>If you have questions, find a bug, or wish to contribute, please visit our GitHub repository or use the feedback buttons below.</p>
+    </div>
+
+    <div class="action-links">
+      <a href="https://github.com/heckthetech/coolnewtab" target="_blank" rel="noopener" class="action-btn">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        View Source
+      </a>
+      <a href="https://heckthetech.github.io/report/" target="_blank" rel="noopener" class="action-btn">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"/></svg>
+        Report / Request Feature
+      </a>
+    </div>
+
+    <div class="footer">
+      <span>Made with 💖 by heckthetech</span>
+    </div>
   </main>
 </body>
 </html>
