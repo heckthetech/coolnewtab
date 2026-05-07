@@ -1,0 +1,22 @@
+//=============addon===============
+//name : "limits Adjuster"
+//version : "1.5"
+//Author : "Heck"
+//uuid : "503b2f26-e584-4cc9-b032-ca6459de82c5"
+//min-environment : "3.0"
+//autoupdate-src : "https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/limitsadjuster/update"
+//=================================
+
+
+enable layoutcustom;
+enable bookmarkcustom;
+
+set override css = ^^
+#bookmarkcustom{display:none;}
+#layoutcustom{display:none;}
+^^;
+
+set localstorage.MAX_BOOKMARKS = 15;
+set localstorage.layoutPattern = 6,5,4;
+
+
