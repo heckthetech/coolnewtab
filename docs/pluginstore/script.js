@@ -1,4 +1,3 @@
-
 const styleOverride = document.createElement('style');
 styleOverride.innerHTML = `
   .overlay-actions { flex-direction: row !important; justify-content: space-between !important; }
@@ -205,19 +204,23 @@ async function urlToBase64(url){ const res = await fetch(url); if (!res.ok) thro
 
 async function getInstalledMetadata() {
   return new Promise(resolve => {
-    const req = indexedDB.open("plugindata", 2);
-    req.onupgradeneeded = e => { 
-        const db = e.target.result; if (!db.objectStoreNames.contains("pluginsettings")) db.createObjectStore("pluginsettings", {keyPath: "uuid"}); 
-    };
-    req.onsuccess = () => {
-      const db = req.result; if (!db.objectStoreNames.contains("pluginsettings")) { db.close(); resolve([]); return; }
-      const tx = db.transaction("pluginsettings", "readonly"), store = tx.objectStore("pluginsettings"), getReq = store.getAll();
-      getReq.onsuccess = () => {
-        resolve(getReq.result || []); 
+    try {
+      const req = indexedDB.open("plugindata", 2);
+      req.onupgradeneeded = e => { 
+          const db = e.target.result; if (!db.objectStoreNames.contains("pluginsettings")) db.createObjectStore("pluginsettings", {keyPath: "uuid"}); 
+      };
+      req.onsuccess = () => {
+        const db = req.result; if (!db.objectStoreNames.contains("pluginsettings")) { db.close(); resolve([]); return; }
+        const tx = db.transaction("pluginsettings", "readonly"), store = tx.objectStore("pluginsettings"), getReq = store.getAll();
+        getReq.onsuccess = () => {
+          resolve(getReq.result || []); 
+        }; 
+        getReq.onerror = () => resolve([]);
       }; 
-      getReq.onerror = () => resolve([]);
-    }; 
-    req.onerror = () => resolve([]);
+      req.onerror = () => resolve([]);
+    } catch (e) {
+      resolve([]);
+    }
   });
 }
 
@@ -427,25 +430,37 @@ window.addEventListener("message", (event) => {
     const pluginSettingsArray = event.data.data;
 
     if (!pluginSettingsArray || pluginSettingsArray === "none" || pluginSettingsArray.length === 0) {
-      const deleteRequest = indexedDB.deleteDatabase("plugindata");
-      deleteRequest.onsuccess = () => { window.plugins = []; renderGrid(searchInput.value.toLowerCase()); }; return;
+      try {
+        const deleteRequest = indexedDB.deleteDatabase("plugindata");
+        deleteRequest.onsuccess = () => { renderGrid(searchInput.value.toLowerCase()); };
+        deleteRequest.onerror = () => { renderGrid(searchInput.value.toLowerCase()); };
+      } catch (e) {
+        renderGrid(searchInput.value.toLowerCase());
+      }
+      return;
     }
-    const dbReq = indexedDB.open("plugindata", 2);
-    dbReq.onupgradeneeded = e => { 
-      const db = e.target.result; 
-      if (!db.objectStoreNames.contains("pluginsettings")) db.createObjectStore("pluginsettings", {keyPath: "uuid"}); 
-    };
-    dbReq.onsuccess = e => {
-      const db = e.target.result; 
-      const tx = db.transaction("pluginsettings", "readwrite"); 
-      const store = tx.objectStore("pluginsettings"); 
-      store.clear();
-      pluginSettingsArray.forEach(p => store.put(p));
-      tx.oncomplete = () => { 
-        window.isRendering = false;
-        renderGrid(searchInput.value.toLowerCase()); 
+    
+    try {
+      const dbReq = indexedDB.open("plugindata", 2);
+      dbReq.onupgradeneeded = e => { 
+        const db = e.target.result; 
+        if (!db.objectStoreNames.contains("pluginsettings")) db.createObjectStore("pluginsettings", {keyPath: "uuid"}); 
       };
-    };
+      dbReq.onsuccess = e => {
+        const db = e.target.result; 
+        const tx = db.transaction("pluginsettings", "readwrite"); 
+        const store = tx.objectStore("pluginsettings"); 
+        store.clear();
+        pluginSettingsArray.forEach(p => store.put(p));
+        tx.oncomplete = () => { 
+          window.isRendering = false;
+          renderGrid(searchInput.value.toLowerCase()); 
+        };
+      };
+      dbReq.onerror = () => { renderGrid(searchInput.value.toLowerCase()); };
+    } catch (e) {
+      renderGrid(searchInput.value.toLowerCase());
+    }
   }
 });
 
