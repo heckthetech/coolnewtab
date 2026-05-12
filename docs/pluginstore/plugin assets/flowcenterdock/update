@@ -1,0 +1,12 @@
+{
+  "Full name": "Flow Center Dock",
+  "uuid" : "108120fd-f2fd-483e-95c8-06bec4b6e542",
+  "currentversion": "1.2",
+  "author": "Heck",
+  "currentfile" : "https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/flowcenterdock/flowcenterdock.addon",
+  "uselsstitle": "Flow Center Dock",
+  "storeshortdescription": "A minimal Glassy theme with a center bottom bookmark dock.",
+  "storelongdescription": "<h2 style='color:#a0d8cc; font-size:28px; margin-bottom:10px;'>Flow Center Dock</h2><p style='font-size:16px; color:#e0e0e0; line-height:1.5;'>Flow Center Dock brings a smooth, glassy animated interface with a centered dock at the bottom. A light and minimal New tab layout.</p><p style='font-size:16px; color:#e0e0e0; line-height:1.5;'><strong>Customize</strong> <br>Adjust maximum bookmarks by changing local storage values<br><br><code style='background:#2a3a3a; padding:4px 6px; border-radius:4px; display:inline-block; margin:6px 0; color:#a0d8cc;'>set localstorage.MAX_BOOKMARKS = 15;<br>set localstorage.layoutPattern = 15;</code><br>Increase or decrease the value to your preference. [not recommended to go above 15]</p>",
+  "storeimg1": "https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/flowcenterdock/fcd.png",
+  "storeimg2": "https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/flowcenterdock/fcdl.png"
+}
