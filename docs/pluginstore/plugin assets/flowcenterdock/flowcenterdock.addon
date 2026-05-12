@@ -1,0 +1,174 @@
+//===============================================addon=========================================================
+//name : "Flow Center Dock"
+//version : "1.2"
+//uuid : "108120fd-f2fd-483e-95c8-06bec4b6e542"
+//Author : "Heck"
+//min-environment : "5.0"
+//description : "A minimal Glassy theme with a center bottom bookmark dock."
+//autoupdate-src : "https://heckthetech.github.io/coolnewtab/pluginstore/plugin%20assets/flowcenterdock/update"
+//==============================================================================================================
+
+enable layoutcustom;
+enable bookmarkcustom;
+
+set localstorage.MAX_BOOKMARKS = 15;
+set localstorage.layoutPattern = 15;
+
+set override css = ^^
+  #digitalClock {  
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 5.5rem;
+    font-weight: 500;
+    letter-spacing: -2px;
+    z-index: 100;
+  }
+
+  .search-bar {
+    position: fixed !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 45%;
+    min-width: 320px;
+    border-radius: 35px;
+    box-shadow: none;
+    z-index: 150;
+    transition: width 1s cubic-bezier(0.2, 0, 0, 1);
+  }
+  
+
+  #searchInput {
+    height: 60px;
+    border-radius: 35px;
+    background: rgba(45, 45, 45, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(25px);
+    font-size: 1.15rem;
+    padding:20px 60px 10px 45px !important;
+  }
+  
+  #searchInput:focus {
+    background: rgba(55, 55, 55, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+.search-icon-wrapper.icon-hidden {
+    transform: translate(0px, -50%) !important;
+}
+#searchIcon {
+width:25px !important;
+height:25px !important;
+}
+
+  #suggestions {    
+    position: fixed !important;
+    top: calc(50% + 33px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 57%;
+    border-radius: 10px;
+    background: rgba(35, 35, 35, 0.85);
+    backdrop-filter: blur(25px);
+    box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+    z-index: 140;
+    max-height: 29%;
+  }
+
+  #tilesContainer {
+    position: fixed;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 15px;
+    background: rgba(25, 25, 25, 0.65);
+    backdrop-filter: blur(13px)brightness(0.1)saturate(2)contrast(0.5);
+    padding: 16px 24px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    width: max-content;
+    overflow-x: auto;
+    overflow-y: hidden;
+    z-index: 200;
+    transition:none;
+  }
+.tilesrow{gap:5px;transition:200ms ease;}
+#tilesContainer:hover:not(.edit-mode) {
+  height: 110px;
+  background: rgba(25, 25, 25, 0.65);
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
+
+#tilesContainer:hover:not(.edit-mode) .tilesrow {
+  gap: 10px;
+}
+.tile-title {display: none !important;}
+
+  .tile {
+    margin: 0;
+    padding: 0;
+    height: 70px !important;
+    min-width: 70px !important;
+    width: 70px;
+    border-radius: 50%; /* Perfect circles */
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    justify-content: center;
+    align-items: center;
+    box-shadow: none;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .tile:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.1) translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  }
+
+  .tile img {
+    margin: 0 !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 6px;
+    transition: transform 0.3s ease;
+  }
+
+  #manageToggle, #settingsBtn, #wallpaperBtn {
+    background: rgba(35, 35, 35, 0.5);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 44px;
+    height: 44px;
+    border-radius: 16px; /* Squircle style */
+    transition: all 0.25s ease;
+  }
+  
+  #manageToggle:hover, #settingsBtn:hover, #wallpaperBtn:hover {
+    background: rgba(60, 60, 60, 0.8);
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  #manageToggle { bottom: 30px; right: 25px; }
+  #settingsBtn { bottom: 90px; right: 25px; margin-right: 0 !important; }
+  #wallpaperBtn { bottom: 150px; right: 25px; }
+^^;
+
+timer.once(100).exec{
+create div with id(#latewidthincrease) ^^
+<style>
+.search-bar:focus-within {width: 60%;}
+</style>
+^^;
+};
+
+timer.once(1000).exec{update.element("#tilesContainer").style("transition","0.3s ease");};
