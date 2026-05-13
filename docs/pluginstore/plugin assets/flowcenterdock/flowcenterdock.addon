@@ -1,6 +1,6 @@
 //===============================================addon=========================================================
 //name : "Flow Center Dock"
-//version : "1.2"
+//version : "1.3"
 //uuid : "108120fd-f2fd-483e-95c8-06bec4b6e542"
 //Author : "Heck"
 //min-environment : "5.0"
@@ -67,13 +67,14 @@ height:25px !important;
     top: calc(50% + 33px);
     left: 50%;
     transform: translateX(-50%);
-    width: 57%;
+    width: 43%;
     border-radius: 10px;
     background: rgba(35, 35, 35, 0.85);
     backdrop-filter: blur(25px);
     box-shadow: 0 15px 50px rgba(0,0,0,0.4);
     z-index: 140;
     max-height: 29%;
+    transition: width 1s cubic-bezier(0.2, 0, 0, 1);
   }
 
   #tilesContainer {
@@ -167,6 +168,9 @@ timer.once(100).exec{
 create div with id(#latewidthincrease) ^^
 <style>
 .search-bar:focus-within {width: 60%;}
+
+.search-bar:focus-within + #suggestions {width: 57%;}
+
 </style>
 ^^;
 };
