@@ -3,128 +3,241 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Interpreter Language Manual</title>
+  <title>Interpreter Language Documentation</title>
   <style>
-
-@font-face {
-      font-family: 'Pfont';
-      src: url('./pluginstore/pfont.ttf') format('truetype');
-    }
+    
     :root {
-      --bg: #121212;
-      --fg: #e0e0e0;
-      --accent: #90caf9;
-      --card: #1e1e1e;
-      --code-bg: #2a2a2a;
-      --border: #333;
-      --highlight: #64ffda;
+      --bg: #070707;
+      --sidebar: #121214;
+      --card: #161616;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text: #f8fafc;
+      --subtext: #94a3b8;
+      --primary: #ffffff;
+      --accent: #10b981;
+      --code-color: #38bdf8;
     }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
     body {
+      font-family:system-ui, sans-serif;
       background: var(--bg);
-      color: var(--fg);
-      font-family: 'Pfont', sans-serif;
-      margin: 0;
+      color: var(--text);
       display: flex;
+      height: 100vh;
+      overflow: hidden;
     }
+
+    *::-webkit-scrollbar { width: 6px; height: 6px; }
+    *::-webkit-scrollbar-track { background: transparent; }
+    *::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 10px; }
+    *::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.3); }
+
     nav {
-      width: 270px;
-      background: #181818;
-      padding: 2rem 1rem;
-      border-right: 1px solid var(--border);
-      position: sticky;
-      top: 0;
+      width: 260px;
+      background: var(--sidebar);
+      border-right: 1px solid var(--card-border);
+      padding: 24px 20px;
       height: 100vh;
       overflow-y: auto;
+      flex-shrink: 0;
     }
+
     nav h2 {
-      color: var(--accent);
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
+      color: var(--primary);
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 20px;
+      padding-left: 8px;
     }
+
     nav ul {
       list-style: none;
-      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
-    nav li {
-      margin: 0.6rem 0;
-    }
+
     nav a {
-      color: var(--fg);
+      color: var(--subtext);
       text-decoration: none;
+      padding: 10px 12px;
       font-size: 0.95rem;
-      padding: 0.3rem 0.5rem;
+      border-radius: 6px;
       display: block;
-      border-radius: 4px;
+      transition: all 0.2s ease;
     }
+
     nav a:hover {
-      background: #252525;
-      color: var(--highlight);
+      background: rgba(255,255,255,0.05);
+      color: var(--primary);
     }
+
     main {
       flex: 1;
-      padding: 2rem;
+      padding: 32px 5%;
       overflow-y: auto;
-      max-height: 100vh;
+      scroll-behavior: smooth;
     }
+
     h1, h2, h3 {
-      color: var(--accent);
+      color: var(--primary);
       margin-bottom: 0.5rem;
+      font-weight: 700;
     }
+
     h1 {
       font-size: 2rem;
-      text-align: center;
+      text-align: left;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 16px;
     }
+
+    h2 {
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+      margin-top: 8px;
+    }
+
+    p {
+      color: var(--subtext);
+      line-height: 1.6;
+      margin-bottom: 16px;
+      font-size: 1rem;
+    }
+
     .section {
       background: var(--card);
-      padding: 1.5rem;
-      border-radius: 10px;
-      margin-bottom: 2rem;
-      border: 1px solid var(--border);
+      padding: 24px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      border: 1px solid var(--card-border);
     }
+
     pre {
-      background: var(--code-bg);
-      color: #80cbc4;
-      padding: 1rem;
+      background: #111113;
+      border: 1px solid var(--card-border);
+      color: var(--code-color);
+      padding: 16px;
       border-radius: 6px;
       overflow-x: auto;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.95rem;
+      font-family: 'Fira Code', Consolas, monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 16px;
     }
+
+    code {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--primary);
+      font-family: 'Fira Code', Consolas, monospace;
+      font-size: 0.9em;
+    }
+
     .step {
-      margin-bottom: 1.2rem;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
+    
+    .step:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
     .step strong {
-      color: var(--highlight);
+      color: var(--primary);
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.05rem;
     }
+
     .note {
-      background: #263238;
-      border-left: 4px solid #00acc1;
-      padding: 1rem;
+      background: rgba(16, 185, 129, 0.05);
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      border-left: 4px solid var(--accent);
+      padding: 16px;
       border-radius: 6px;
-      color: #b2ebf2;
-      margin-top: 1rem;
+      color: #a7f3d0;
+      margin-top: 20px;
+      line-height: 1.6;
     }
+
+    .note strong {
+      color: var(--accent);
+    }
+
     ul {
       padding-left: 1.5rem;
+      color: var(--subtext);
+      margin-bottom: 16px;
     }
+
+    li {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
     a {
-      color: #4fc3f7;
+      color: #38bdf8;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    em {
+      color: var(--subtext);
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+        overflow-y: auto;
+      }
+      nav {
+        width: 100%;
+        height: auto;
+        position: relative;
+        border-right: none;
+        border-bottom: 1px solid var(--card-border);
+      }
+      main {
+        overflow-y: visible;
+        padding: 24px 5%;
+      }
     }
   </style>
 </head>
 <body>
   <nav>
-    <h2>📚 Learn Interpreter Language</h2>
+    <h2>📚 Learn Interpreter Language v5.0</h2>
     <ul>
       <li><a href="#intro">🧠 Intro</a></li>
       <li><a href="#structure">🧱 Structure</a></li>
+      <li><a href="#variables">🧮 Variables & Strings</a></li>
+      <li><a href="#math">🔢 Math Engine</a></li>
+      <li><a href="#domgrab">🎣 Grab from DOM</a></li>
+      <li><a href="#logic">🔀 If/Else Logic</a></li>
       <li><a href="#create">📦 Create Elements</a></li>
+      <li><a href="#update">🎛️ DOM Update</a></li>
+      <li><a href="#timer">⏱️ Timer Function</a></li>
       <li><a href="#storage">💾 Storage</a></li>
+      <li><a href="#state">🚩 State Management</a></li>
       <li><a href="#event">🎯 Event Listeners</a></li>
       <li><a href="#input">🧍 Get Input</a></li>
       <li><a href="#date">📅 Date Format</a></li>
+      <li><a href="#time">⏰ Time Format</a></li>
       <li><a href="#search">🔍 Search Widget</a></li>
-      <li><a href="#css">🎨 CSS</a></li>
+      <li><a href="#css">🎨 CSS & Interpolation</a></li>
       <li><a href="#drag">📦 Draggable</a></li>
       <li><a href="#example">🧪 Example</a></li>
       <li><a href="#rules">📏 Rules</a></li>
@@ -132,24 +245,154 @@
     </ul>
   </nav>
   <main>
-    <h1>📘 Interpreter Language Manual</h1>
+    <h1>📘 Interpreter Language Documentation (v5.0)</h1>
 
     <div class="section" id="intro">
       <h2>🧠 What is Interpreter Language?</h2>
-      <p><strong>Interpreter Language</strong> (Developed by heck) is a simple language for creating widgets like counters, buttons, inputs, and draggable windows — all without needing to write JavaScript directly.</p>
-      <p>Everything is written using easy-to-read commands inside special blocks starting with <code>^^</code> and ending with <code>^^;</code>.</p>
-      <p>This manual will guide you step-by-step, perfect if you're new to this!</p>
+      <p><strong>Interpreter Language</strong> is a lightweight plugin language for creating widgets such as counters, buttons, inputs, and draggable items or even changing styles and outlook of the target page without writing JavaScript directly. Manifest V3 safe processing of user modification.</p>
+      <p>Everything is written using easy-to-read commands (all described in this documentation)</p>
+      <p>This Documentation will guide you step-by-step, if you're new to this!</p>
     </div>
 
     <div class="section" id="structure">
-      <h2>🧱 Step-by-Step: Basic Structure</h2>
+      <h2>Basic Structure</h2>
+      <div class="step">Start with plugin's name author etc in commented code inside //===addon=== block.<br><br>
+        <pre>//=============addon===============
+//name : "NewPlugin"
+//version : "1.0"
+//Author : "You"
+//uuid : "random-uuid-here"
+//min-environment : "required.engine.version.in.numbers"
+//=================================
+
+// then the code starts
+        </pre>
+      </div>
+    <div class="section" id="variables">
+      <h2>🧮 Variables, Constants, and Strings</h2>
+      <p>You can define memory variables and constants that act just like JavaScript variables. You can combine strings and variables using the <code>+</code> sign.</p>
+      
       <div class="step">
-        <strong>Step 1:</strong> Write your command line. For example:<br>
+        <strong>Create a variable:</strong><br>
+        <pre>variable myvar = "Hello! you can change me";
+constant myconst = "wow , I won't change";
+variable emptyvar;
+emptyvar = 100;</pre>
+      </div>
+
+      <div class="step">
+        <strong>Combine strings:</strong><br>
+        <pre>variable greeting = myVar + " World! " + emptyVar;
+variable customMessage = pastvariable + "th time " + aconstant;</pre>
+      </div>
+
+      <div class="step">
+        <strong>Interpolation Everywhere:</strong><br>
+        <p>The <code>loadtextfrom()</code> wrapper works like javascript's <code>${}</code>. You can embed it inside quotes, inside math blocks, and even in CSS.</p>
+        <pre>myVar = "Today is loadtextfrom(date.format="dayname")";
+myConst = loadtextfrom(localstorage.score);</pre>
+      </div>
+
+      <div class="step">
+        <strong>Show them in your HTML:</strong><br>
+        <pre>create div with id(#app)^^
+  &lt;p&gt;loadtextfrom(myVar)&lt;/p&gt;
+^^;</pre>
+      </div>
+    </div>
+
+    <div class="section" id="math">
+      <h2>🔢 Math Engine (maybe unstable)</h2>
+      <p>Language supports math calculation logics. You can calculate dynamically using standard math syntax inside a <code>math(...)</code> command block.</p>
+      
+      <div class="step">
+        <strong>Basic Operations:</strong><br>
+        <pre>variable day = 25;
+variable total = math((day*100) + (day/5));
+variable squared = math(day^2);</pre>
+      </div>
+
+      <div class="step">
+        <strong>Advanced Math Functions:</strong><br>
+        <p>Functions like rounding, generating random numbers, and formatting string decimals:</p>
+        <pre>variable rounded = math(round(12.6));          // Returns 13
+variable floored = math(floor(12.6));          // Returns 12
+variable ceiled  = math(ceil(12.1));           // Returns 13
+variable randNum = math(random * 100);         // Random number between 0 and 100
+variable fixed   = math((12.3456).tofixed(2)); // Returns "12.35"</pre>
+      </div>
+
+      <div class="step">
+        <strong>Interpolation inside/with Math</strong><br>
+        <p>Because <code>loadtextfrom()</code> works everywhere, you can seamlessly bring in storage inside math blocks.</p>
+        <pre>variable dynTotal = math(loadtextfrom(localstorage.count) * 2 + 5);</pre>
+      </div>
+
+      <div class="step">
+        <strong>Using inside HTML Elements:</strong><br>
+        <pre>create div with id(#app)^^
+  &lt;p&gt;Calculated value: loadtextfrom(math(total + 10))&lt;/p&gt;
+^^;</pre>
+      </div>
+    </div>
+
+    <div class="section" id="domgrab">
+      <h2>🎣 Grab from DOM directly</h2>
+      <p>You can retrieve live data from elements on the page. Directly capture innerText, innerHTML, values, and styles from any element using the <code>element(#id).property</code> syntax wrapped in <code>loadtextfrom()</code>.</p>
+      
+      <div class="step">
+        <strong>Usage Examples:</strong><br>
+        <pre>variable liveText = loadtextfrom(element(#titleText).innerText);
+variable rawHTML = loadtextfrom(element(.my-container).innerHTML);
+variable typedInput = loadtextfrom(element(#usernameInput).value);
+variable boxStyle = loadtextfrom(element(#app).style);</pre>
+      </div>
+    </div>
+
+    <div class="section" id="logic">
+      <h2>🔀 Logic (If / ElseIf / Else)</h2>
+      <p>Conditional logic if, elseif, and else statements nearly similar to javascript.</p>
+      
+      <div class="step">
+        <strong>Basic If/Else:</strong><br>
+        <pre>variable myvar = "11";
+
+if(myvar == "11").exec{
+  update.element("#status").innerHTML("It is 11!");
+}
+else.exec{update.element("#status").innerHTML("It is NOT 11!");}</pre>
+      </div>
+
+      <div class="step">
+        <strong>Using Else If (elseif):</strong><br>
+        <pre>variable power = 9001;
+
+if(power < 5000).exec{
+  update.element("#scouter").innerHTML("Weak");
+}
+elseif(power > 9000).exec{
+  update.element("#scouter").innerHTML("Strong");
+}
+else.exec{
+  update.element("#scouter").innerHTML("Meh");
+}</pre>
+      </div>
+      
+      <div class="note">
+        Standard comparison operators like <code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, and <code>===</code> are supported.<br>
+        Run any interpreter code inside the <code>exec{....}</code> block.
+      </div>
+    </div>
+
+    <div class="section" id="create">
+      <h2>📦 Creating Elements (Line sensitive)</h2>
+      <div class="step">Write the command in multiple lines. For example:<br><br>
+        <strong>Step 1 :</strong>
         <code>create div with id(#hello)^^</code>
       </div>
       <div class="step">
         <strong>Step 2:</strong> On a new line, add the HTML content you want inside that element.<br>
-        <em>Don't put content inline with the command.</em>
+        <em>Don't write content in the same line with this command.(line gap must)</em>
       </div>
       <div class="step">
         <strong>Step 3:</strong> Close the command block with <code>^^;</code> on its own line.
@@ -159,66 +402,105 @@
 ^^;</pre>
     </div>
 
-    <div class="section" id="create">
-      <h2>📦 Creating Elements</h2>
-      <p>To add elements, use <code>create</code> with the element type and ID.</p>
+    <div class="section" id="update">
+      <h2>🎛️ DOM Update (Dynamic)</h2>
+      <p>Use <code>update.element(...)</code> to modify text, style, HTML and other properties dynamically.</p>
+      
       <div class="step">
-        <strong>Example:</strong> Create a box that says "Hello World":<br>
-        <pre>create div with id(#mybox)^^
-  &lt;h1&gt;Hello World&lt;/h1&gt;
-  &lt;p&gt;This is a custom widget.&lt;/p&gt;
-^^;</pre>
+        <strong>Update innerHTML and innerText Dynamically:</strong><br>
+        <pre>update.element("#hello").innerHTML("New title!");
+update.element(".classname").innerText(loadtextfrom(myVar)); //updates all element with this class
+update.element("#msg").innerHTML("Status: loadtextfrom(localstorage.status)");</pre>
       </div>
-      <p>You can put any valid HTML inside the block.</p>
+
+      <div class="step">
+        <strong>Set Attributes and Styles:</strong><br>
+        <pre>update.element("#hitext").setattribute("placeholder", "Type here...");
+update.element(".box").style("color", "red"); //updates all element with this class
+update.element("#box").style("color: loadtextfrom(myColor);");</pre>
+      </div>
+    </div>
+    
+    <div class="section" id="timer">
+      <h2>⏱️ Timer Function</h2>
+      <p>Use the timer function to execute commands after a delay or at regular intervals.It allows execution of code blocks after a delay or repeatedly.</p>
+      
+      <div class="step">
+        <strong>Run once after a delay (once):</strong><br>
+        <p>Specify the time in ms (milliseconds), s (seconds) or just numbers (milliseconds by default).</p>
+        <pre>timer.once(1000).exec{ update.element("#box").style("color", "red"); };
+timer.once(1s).exec{ update.element("#box").style("color", "blue"); };</pre>
+      </div>
+
+      <div class="step">
+        <strong>Run repeatedly on an interval (loop):</strong><br>
+        <pre>timer.loop(2s).exec{
+  inc localstorage.counter;
+  update.element("#display").innerHTML(loadtextfrom(localstorage.counter));
+};</pre>
+      </div>
     </div>
 
     <div class="section" id="storage">
       <h2>💾 Using Storage</h2>
-      <p>Interpreter Language lets you save values that stick around even if the page reloads, using <code>localstorage</code>.</p>
+      <p>Language supports persistent storage through <code>localstorage</code>.</p>
       <div class="step">
         <strong>Set a value:</strong><br>
         <pre>set localstorage.score = "100";</pre>
       </div>
       <div class="step">
-        <strong>Set default value if none exists yet:</strong><br>
-        <pre>default localstorage.count = 0;</pre>
-      </div>
-      <div class="step">
         <strong>Change values easily:</strong><br>
-        <pre>inc localstorage.count;  // increase by 1
-dec localstorage.count;  // decrease by 1
-reset localstorage.count;  // reset to empty</pre>
+        <pre>inc localstorage.count;
+dec localstorage.count;
+reset localstorage.count;</pre>
+      </div>
+    </div>
+    
+    <div class="section" id="state">
+      <h2>🚩 State Management (Enable/Disable)</h2>
+      <p>Set hidden "flags" or states using the <code>enable</code> and <code>disable</code> commands.</p>
+      <p>This command doesn't look usefull , but added for Cool New Tab's support.</p>
+      <div class="step">
+        <strong>Example:</strong> Set a state called 'featureX' to "on":<br>
+        <pre>enable featureX;</pre>
       </div>
     </div>
 
     <div class="section" id="event">
       <h2>🎯 Event Listeners (Click Actions)</h2>
-      <p>To react to clicks or other events, use <code>create eventlistener-on(#id)-doing^^ ... ^^;</code>.</p>
+      <p>React to clicks, using <code>create eventlistener-on(#id)-doing^^ ... ^^;</code> code block.</p>
+      <p>Only click listener for now , will add more listener compatibility in future.</p>
       <div class="step">
-        <strong>Example:</strong> Increase a counter when a button is clicked:<br>
+        <strong>Example:</strong> Increase a counter when a button is clicked and dynamically update it with DOM Update:<br>
         <pre>create eventlistener-on(#plus)-doing^^
   inc localstorage.count;
+  update.element("#thenumber").innerHTML(loadtextfrom(localstorage.count));
 ^^;</pre>
       </div>
-      <p>This adds a click listener to <code>#plus</code> that increases the <code>count</code> stored value.</p>
     </div>
 
     <div class="section" id="input">
       <h2>🧍 Getting Input Values</h2>
-      <p>If you create an input element, you can get its current value using <code>getvalue(#inputid)</code>.</p>
+      <p>Get the text typed inside an input field and save it to storage using the <code>element(#id).value</code> syntax.</p>
       <div class="step">
         <strong>Example:</strong> Save the text typed inside input <code>#myinput</code> when a button is clicked:<br>
         <pre>create eventlistener-on(#savebtn)-doing^^
-  set localstorage.text = getvalue(#myinput)
+  set localstorage.text = loadtextfrom(element(#myinput).value);
 ^^;</pre>
       </div>
     </div>
 
     <div class="section" id="date">
       <h2>📅 Date Format</h2>
-      <p>To show dates, use:</p>
+      
+
+      <p>To show formatted dates, use:</p>
       <pre>loadtextfrom(date.format="dd/mm/yyyy dayname")</pre>
-      <p>Where:</p>
+      
+      <p>To get the current timestamp in milliseconds (like JavaScript's <code>Date.now()</code>), use:</p>
+      <pre>loadtextfrom(date.now)</pre>
+
+      <p>List:</p>
       <ul>
         <li><code>dd</code> = day number (01–31)</li>
         <li><code>mm</code> = month number (01–12)</li>
@@ -228,29 +510,64 @@ reset localstorage.count;  // reset to empty</pre>
         <li><code>yy</code> = short year (25)</li>
         <li><code>dayname</code> = full weekday name (Friday)</li>
         <li><code>day</code> = short weekday name (Fri)</li>
+        <li><code>date.now</code> = number of milliseconds since January 1, 1970</li>
       </ul>
+    </div>
+
+    <div class="section" id="time">
+      <h2>⏰ Time Format</h2>
+      <p>Show the current time using <code>time.format</code>. Supports 12-hour and 24-hour formats.</p>
+      
+      <div class="step">
+        <strong>12-Hour Format:</strong><br>
+        <pre>loadtextfrom(time.format.12h="hh:mm:ss Period")</pre>
+        <em>Result: 04:12:43 PM</em>
+      </div>
+      
+      <div class="step">
+        <strong>24-Hour Format (Default):</strong><br>
+        <p>If <code>.12h</code> or <code>.24h</code> not specified , it uses 24-hour time by default. Also ignores the Period keyword if added.</p>
+        <pre>loadtextfrom(time.format.24h="hh:mm:ss Period")
+loadtextfrom(time.format.24h="hh:mm:ss")
+loadtextfrom(time.format="hh:mm:ss")</pre>
+        <em>All Results same : 16:12:43</em>
+      </div>
+
+      <div class="step">
+        <strong>List:</strong>
+        <ul>
+          <li><code>hh</code> = 2-digit hour 04, 16</li>
+          <li><code>h</code> = 1-digit hour preferred 4, 16</li>
+          <li><code>mm</code> = 2-digit minute 05 , 45</li>
+          <li><code>m</code> = 1-digit minute preferred 5 , 45</li>
+          <li><code>ss</code> = 2-digit second 09 , 43</li>
+          <li><code>s</code> = 1-digit second preferred 9 , 43</li>
+          <li><code>Period</code> = AM / PM (uppercase)</li>
+          <li><code>period</code> = am / pm (lowercase)</li>
+        </ul>
+      </div>
     </div>
 
     <div class="section" id="search">
       <h2>🔍 Search Widget</h2>
-      <p>Create a search box that links to a website search like Google with:</p>
+      <p>Attach a search input box to a link search with a button:</p>
       <pre>create searcher for-(https://google.com/search?q=!!gettextfrominputid!!)-inputid(#input)-buttonid(#btn)</pre>
-      <p>This creates a search that sends input text to Google when the button is clicked.</p>
     </div>
 
     <div class="section" id="css">
-      <h2>🎨 Applying CSS</h2>
-      <p>To add CSS styles, use <code>set override css = ^^ ... ^^;</code>.</p>
+      <h2>🎨 Applying CSS (Line sensitive)</h2>
+      <p>To add CSS styles, start with <code>set override css = ^^</code><br>and go to next line and write css styles <br> and final line close with <code>^^;</code></p>
       <div class="step">
-        <strong>Example:</strong> Change body background and text color:<br>
-        <pre>set override css = ^^
+        <strong>Example:</strong> Change body background with variable interpolation:<br>
+        <pre>variable themeColor = "#121212";
+
+set override css = ^^
   body {
-    background: black;
+    background: loadtextfrom(themeColor);
     color: white;
   }
 ^^;</pre>
       </div>
-      <p>Note: Avoid overriding body styles if the parent page already has them.</p>
     </div>
 
     <div class="section" id="drag">
@@ -259,53 +576,47 @@ reset localstorage.count;  // reset to empty</pre>
       <pre>&lt;div dragmovable&gt;Drag me!&lt;/div&gt;</pre>
       <p>You can also add offsets or save position:</p>
       <pre>&lt;div dragmovable="-5,-5"&gt;Offset drag&lt;/div&gt;
-&lt;div dragmovable="0,0,stored"&gt;Saved position&lt;/div&gt;</pre>
+&lt;div dragmovable="-5,-5,stored"&gt;Saved position&lt;/div&gt;</pre>
     </div>
 
     <div class="section" id="example">
       <h2>🧪 Full Example</h2>
       <pre>set override css = ^^
-  body { #app: black; color: white; }
+  #app { background: black; color: white; padding: 20px; }
 ^^;
 
 default localstorage.count = 0;
 
 create div with id(#app)^^
   &lt;h1&gt;Counter&lt;/h1&gt;
-  &lt;p&gt;loadtextfrom(localstorage.count)&lt;/p&gt;
-  &lt;button id="plus"&gt;+&lt;button&gt;
-  &lt;button id="minus"&gt;-&lt;button&gt;
+  &lt;p&gt;Count: &lt;span id="countDisplay"&gt;loadtextfrom(localstorage.count)&lt;/span&gt;&lt;/p&gt;
+  &lt;button id="plus"&gt;+&lt;/button&gt;
+  &lt;button id="minus"&gt;-&lt;/button&gt;
 ^^;
 
 create eventlistener-on(#plus)-doing^^
   inc localstorage.count;
+  update.element("#countDisplay").innerHTML(loadtextfrom(localstorage.count));
 ^^;
 
 create eventlistener-on(#minus)-doing^^
   dec localstorage.count;
+  update.element("#countDisplay").innerHTML(loadtextfrom(localstorage.count));
 ^^;</pre>
-      <p>This creates a simple counter widget with increment and decrement buttons.</p>
     </div>
 
     <div class="section" id="rules">
       <h2>📏 Rules You Must Follow</h2>
       <ul>
-        <li>Start code blocks with <code>//pluginname{Plugin Name}version{1.0}Author{Author}</code> (recommended).</li>
-        <li>Commands must start with the command and <code>^^</code> on the same line, no line break.</li>
-        <li>Content must be written between the two <code>^^</code> lines and closed with <code>^^;</code>.</li>
-        <li>Never write content inline like <code>create div ^^ &lt;p&gt;Hi&lt;/p&gt; ^^;</code>. Use new lines.</li>
-        <li>Each command block (<code>create</code>, <code>set</code>, <code>eventlistener</code>, <code>css</code>) must follow this format.</li>
-        <li>Widgets should have a style property <code>z-index: 1;</code> on div IDs for visibility.</li>
-        <li>Widgets are best made draggable using <code>dragmovable</code> attribute.</li>
+        <li>In the editor <code>//uuid</code> can't be deleted , you can click it to generate a new one</li>
+        <li>Never write content inline like <code>create div ^^ &lt;p&gt;Hi&lt;/p&gt; ^^;</code> on line sensitive commands. Must use new lines.</li>
       </ul>
     </div>
 
     <div class="section" id="tips">
       <h2>💡 Tips</h2>
       <ul>
-        <li>Don't override <code>body</code> styles unless necessary.</li>
-        <li>Use professional and cool dark-themed CSS for better user experience.</li>
-        <li>Make widgets draggable with a header bar for easier movement and saving position.</li>
+        Just make the New tab Cooler ✨
       </ul>
     </div>
   </main>
