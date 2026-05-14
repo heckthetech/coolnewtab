@@ -8,10 +8,10 @@ A sleek, fast, and customizable new tab experience for your browser — optimize
 
 - Clean and minimal design  
 - Quick access to your favorite sites  
-- Vast search engine support with [custom search engines](https://heckthetech.github.io/coolnewtab/wiki/searchengine)  
+- Any search engine support with [custom search engines](https://heckthetech.github.io/coolnewtab/wiki/searchengine)  
 - Extremely customizable through [Interpreter Language](https://heckthetech.github.io/coolnewtab/interpreterlanguage.html) and [Plugins](https://heckthetech.github.io/coolnewtab/pluginstore/)  
 - Lightweight and fast loading, designed to work smoothly even on low-end devices  
-- Minimal RAM usage for better performance on systems with limited resources  
+- Minimal RAM usage and better performance on systems with limited resources  
 
 ## Installation
 
@@ -20,7 +20,7 @@ A sleek, fast, and customizable new tab experience for your browser — optimize
 
 **OR** download manually:
 
-[![Latest stable release - Download](https://img.shields.io/badge/Latest%20stable%20Release%20-%20Download%20Crx-blue?style=for-the-badge&logo=github)](https://github.com/heckthetech/coolnewtab/releases/download/v2.5.0/cool-newtab_v2.5.0_stable_release.crx) [![Latest stable release - Download](https://img.shields.io/badge/Latest%20stable%20Release%20-%20Download%20Zip-blue?style=for-the-badge&logo=github)](https://github.com/heckthetech/coolnewtab/releases/download/v2.5.0/cool-newtab_v2.5.0_stable_release.zip)
+[![Latest stable release - Download](https://img.shields.io/badge/Latest%20stable%20Release%20-%20Download%20Crx-blue?style=for-the-badge&logo=github)](https://github.com/heckthetech/coolnewtab/releases/download/v3.0.1/cool-newtab_v3.0.1_stable_release.crx) [![Latest stable release - Download](https://img.shields.io/badge/Latest%20stable%20Release%20-%20Download%20Zip-blue?style=for-the-badge&logo=github)](https://github.com/heckthetech/coolnewtab/releases/download/v3.0.1/cool-newtab_v3.0.1_stable_release.zip)
 
 After downloading:
 
